@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>酒文化·产地 · 微醺手册</title>
+<meta name="description" content="从贾湖古酒到便利店冰杯的九千年酒文化时间线，赤水河、斯佩塞、干邑、哈利斯科等 15 个世界酒产地风土，和诗里的酒与酒桌小规矩。">
+<link rel="icon" type="image/svg+xml" href="favicon.svg">
+<link rel="stylesheet" href="assets/css/site.css">
+</head>
+<body>
+<header class="site-header">
+  <div class="wrap nav">
+    <a class="brand" href="index.html"><svg viewBox="0 0 32 32" aria-hidden="true"><path d="M6 7h20l-8 10v8h5v2H9v-2h5v-8Z" fill="#b45309"/><circle cx="21" cy="9.5" r="2.4" fill="#c9a227"/></svg><span>微醺手册<small>TIPSY NOTES</small></span></a>
+    <button class="nav-toggle" aria-expanded="false" aria-controls="navLinks">菜单</button>
+    <nav id="navLinks" class="nav-links" aria-label="主导航">
+      <a href="index.html">首页</a>
+      <a href="mix.html">调酒实验室</a>
+      <a href="guide.html">新手入门</a>
+      <a href="spirits.html">名酒图鉴</a>
+      <a href="culture.html" aria-current="page">酒文化·产地</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+  <section class="page-hero">
+    <div class="wrap">
+      <span class="eyebrow">Culture &amp; Terroir · 九千年的一杯</span>
+      <h1>酒文化 · 产地</h1>
+      <p>酒从来不只是酒精。它是祭祀的礼器、诗人的下酒句、河谷里的微生物、港口边的橡木桶。这一页沿着时间线看酒怎么走到今天，再按产区看风土如何写进味道，最后读几首关于酒的中国诗。</p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="wrap">
+      <div class="section-head reveal">
+        <span class="eyebrow">Timeline · 时间线</span>
+        <h2>从贾湖陶罐，到便利店的冰杯</h2>
+        <p class="muted">点开任意一个时代，看那一杯酒背后的技术与生活。默认展开第一段。</p>
+      </div>
+      <div class="timeline" id="timeline"></div>
+    </div>
+  </section>
+
+  <section class="section" style="background:color-mix(in srgb, var(--site-accent) 4%, var(--site-bg))">
+    <div class="wrap">
+      <div class="section-head reveal">
+        <span class="eyebrow">Terroir · 产地</span>
+        <h2>风土：同一株葡萄，不同的山坡</h2>
+        <p class="muted">土壤、气候、水源与微生物，决定了原料的糖、酸与香气前体。切换产区标签，看 15 个地方各自酿出了什么。</p>
+      </div>
+      <div class="filter-row" id="regionTabs" style="margin-bottom:20px"></div>
+      <div class="grid cols-2" id="regionGrid"></div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="wrap">
+      <div class="section-head reveal">
+        <span class="eyebrow">Poetry · 诗里的酒</span>
+        <h2>古人没有冰箱，但有月亮</h2>
+        <p class="muted">中国诗里的酒，多半不是豪饮，而是一个人对着月亮、雪夜或远方朋友的那一杯。</p>
+      </div>
+      <div class="grid cols-2" id="poemGrid"></div>
+    </div>
+  </section>
+
+  <section class="section" style="padding-top:12px">
+    <div class="wrap">
+      <div class="section-head reveal">
+        <span class="eyebrow">Notes · 文化拾遗</span>
+        <h2>酒桌之外，还有这些讲究</h2>
+      </div>
+      <details class="accordion reveal"><summary>酒礼与座次：中国酒桌的隐形规则</summary><div class="acc-body">传统宴席讲究「主陪、副陪、主宾、副宾」的座次，敬酒从主宾开始、按顺时针推进；碰杯时杯沿略低于对方是敬意。现代小聚不必照搬，但两条底线值得保留：不强行劝酒，不拿「不喝就是不给面子」绑架别人。真正的酒礼，是让每个人都舒服。</div></details>
+      <details class="accordion reveal"><summary>酒器简史：从青铜爵到玻璃杯</summary><div class="acc-body">商周用青铜爵、角、尊祭祀；汉代流行漆耳杯与羽觞；唐代金银器与瓷盏并行，「葡萄美酒夜光杯」说的正是西域玉杯；宋代建盏、青白瓷把点茶与饮酒分开；明清以后玻璃与瓷器普及。今天调酒用的高球杯、古典杯、马天尼杯，本质都是为温度、气泡与香气服务的容器。</div></details>
+      <details class="accordion reveal"><summary>世界酒礼小对照：清酒、葡萄酒、威士忌</summary><div class="acc-body">日本清酒讲究斟满与互换酒杯，干杯后先小口；法国葡萄酒讲究观色、闻香、品味，倒酒只倒三分之一；苏格兰威士忌可以加水或冰，但纯饮时先闻后抿。规则各不相同，共同点是：慢一点，让酒在杯里多待一会儿。</div></details>
+      <details class="accordion reveal"><summary>酒吧点单：不懂酒也能点得体面</summary><div class="acc-body">告诉调酒师三件事：喜欢的基酒（或「没有偏好」）、酸甜偏好（偏酸/偏甜/清爽/浓烈）、酒精强度（低度/标准/烈）。不知道点什么，就从金汤力、威士忌高球或莫吉托开始——这三杯几乎不会踩雷。不想喝酒时，点无酒精特调也完全正常。</div></details>
+    </div>
+  </section>
+
+  <section class="section" style="padding-top:12px">
+    <div class="wrap">
+      <div class="note-box reveal">
+        想把这些产地装进杯子？去 <a href="mix.html">调酒实验室</a> 找配方，或到 <a href="spirits.html">名酒图鉴</a> 看每类酒的工艺与价格。理性饮酒，微醺胜买醉。
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="site-footer">
+  <div class="wrap">
+    <div class="cols">
+      <div><h4>微醺手册</h4><p>把小酒馆搬回家。配方、名酒、产地与故事，都为了让一个人或小聚的时刻更好喝一点。</p></div>
+      <div><h4>逛逛</h4><p><a href="mix.html">调酒实验室</a><br><a href="guide.html">新手入门</a><br><a href="spirits.html">名酒图鉴</a><br><a href="culture.html">酒文化·产地</a></p></div>
+      <div><h4>记住</h4><p>未成年人禁止饮酒<br>喝酒不开车<br>服药不饮酒（尤其头孢类）<br>微醺即止，不劝酒</p></div>
+    </div>
+    <div class="legal">文化、产地与诗词内容整理自公开资料；引诗以通行版本为准。理性饮酒，微醺胜买醉。© 2026 微醺手册</div>
+  </div>
+</footer>
+
+<script src="assets/js/data.js"></script>
+<script src="assets/js/site.js"></script>
+<script src="assets/js/culture.js"></script>
+</body>
+</html>

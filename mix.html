@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>调酒实验室 · 微醺手册</title>
+<meta name="description" content="47 款家庭调酒配方：创意特调、便利店公式、懒人冰杯、下班特调、经典直调。按基酒与材料筛选，毫升级做法、口感与新手提示，支持份量缩放与一键复制。">
+<link rel="icon" type="image/svg+xml" href="favicon.svg">
+<link rel="stylesheet" href="assets/css/site.css">
+</head>
+<body>
+<header class="site-header">
+  <div class="wrap nav">
+    <a class="brand" href="index.html"><svg viewBox="0 0 32 32" aria-hidden="true"><path d="M6 7h20l-8 10v8h5v2H9v-2h5v-8Z" fill="#b45309"/><circle cx="21" cy="9.5" r="2.4" fill="#c9a227"/></svg><span>微醺手册<small>TIPSY NOTES</small></span></a>
+    <button class="nav-toggle" aria-expanded="false" aria-controls="navLinks">菜单</button>
+    <nav id="navLinks" class="nav-links" aria-label="主导航">
+      <a href="index.html">首页</a>
+      <a href="mix.html" aria-current="page">调酒实验室</a>
+      <a href="guide.html">新手入门</a>
+      <a href="spirits.html">名酒图鉴</a>
+      <a href="culture.html">酒文化·产地</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+  <section class="page-hero">
+    <div class="wrap">
+      <span class="eyebrow">Mixology Lab · 重点页面</span>
+      <h1>调酒实验室</h1>
+      <p id="catDesc">从便利店冰杯到签名鸡尾酒，按分类、基酒或材料搜索，点开任意一杯看完整做法。</p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="wrap">
+      <div class="filter-bar">
+        <div class="filter-row">
+          <span class="label">分类</span>
+          <span id="catChips" style="display:flex;gap:8px;flex-wrap:wrap"></span>
+          <span class="search-box">
+            <svg viewBox="0 0 24 24" fill="none" stroke-width="2" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
+            <input id="searchInput" type="search" placeholder="搜酒名 / 材料，如：柠檬、百利甜" aria-label="搜索配方">
+          </span>
+        </div>
+        <div class="filter-row">
+          <span class="label">基酒</span>
+          <span id="baseChips" style="display:flex;gap:8px;flex-wrap:wrap"></span>
+        </div>
+        <div class="result-count" id="resultCount" aria-live="polite"></div>
+      </div>
+      <div class="grid cols-3" id="recipeGrid"></div>
+      <div class="note-box" style="margin-top:28px">
+        配方整理自小红书博主公开分享与网络公开经典配方：创意特调九款来自「咖啡杰瑞」，便利店公式 / 懒人冰杯 / 下班特调来自小红书合集帖。所有比例、毫升数与酒精度估算仅供参考——果汁甜度、冰量、杯子大小都会改变结果，边调边尝才是正解。未成年人禁止饮酒；喝酒不开车；服药不饮酒。
+      </div>
+    </div>
+  </section>
+</main>
+
+<dialog id="recipeModal" class="modal" aria-labelledby="mName">
+  <div class="modal-inner" style="position:relative">
+    <button id="mClose" class="modal-close" aria-label="关闭配方详情">×</button>
+    <div class="modal-hero">
+      <div class="pic" id="mPic"></div>
+      <div class="info">
+        <h3 id="mName"></h3>
+        <div class="en" id="mEn"></div>
+        <div id="mTags"></div>
+        <p class="small muted" id="mRatio" style="margin:10px 0 0"></p>
+      </div>
+    </div>
+    <div class="modal-body">
+      <div class="modal-tools">
+        <span class="small muted">份量缩放</span>
+        <span class="scaler">
+          <button id="mMinus" aria-label="减少半份">−</button>
+          <output id="mMult">×1</output>
+          <button id="mPlus" aria-label="增加半份">＋</button>
+        </span>
+        <button class="btn ghost small" id="mCopy">复制配方</button>
+      </div>
+      <h4>材料</h4>
+      <ul class="ing-list" id="mIng"></ul>
+      <h4>做法</h4>
+      <ol class="steps" id="mSteps"></ol>
+      <h4>口感</h4>
+      <p id="mTaste"></p>
+      <h4>新手提示</h4>
+      <div class="note-box" id="mTips"></div>
+      <h4>装饰</h4>
+      <p class="muted" id="mGarnish"></p>
+      <p class="small muted" id="mSource" style="margin-top:14px"></p>
+    </div>
+  </div>
+</dialog>
+
+<footer class="site-footer">
+  <div class="wrap">
+    <div class="cols">
+      <div><h4>微醺手册</h4><p>把小酒馆搬回家。配方、名酒、产地与故事，都为了让一个人或小聚的时刻更好喝一点。</p></div>
+      <div><h4>逛逛</h4><p><a href="mix.html">调酒实验室</a><br><a href="guide.html">新手入门</a><br><a href="spirits.html">名酒图鉴</a><br><a href="culture.html">酒文化·产地</a></p></div>
+      <div><h4>记住</h4><p>未成年人禁止饮酒<br>喝酒不开车<br>服药不饮酒（尤其头孢类）<br>微醺即止，不劝酒</p></div>
+    </div>
+    <div class="legal">配方整理自小红书博主公开分享与网络公开经典配方；酒款图片裁切自用户收集的小红书笔记。比例与价格仅供参考。理性饮酒，微醺胜买醉。© 2026 微醺手册</div>
+  </div>
+</footer>
+
+<script src="assets/js/data.js"></script>
+<script src="assets/js/site.js"></script>
+<script src="assets/js/mix.js"></script>
+</body>
+</html>
