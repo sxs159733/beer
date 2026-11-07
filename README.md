@@ -26,7 +26,7 @@ assets/js/site.js        导航、主题与公共交互
 assets/js/mix.js         调酒实验室逻辑
 assets/js/spirits.js     名酒图鉴逻辑
 assets/js/culture.js     酒文化与产区逻辑
-assets/img/              25 张实拍图
+assets/img/              47 张实拍图
 ```
 
 ## 本地预览
