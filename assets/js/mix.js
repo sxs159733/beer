@@ -17,7 +17,8 @@
       '<span class="thumb">' + thumb + "</span>" +
       '<span class="body"><span class="names"><strong>' + WX.esc(r.name) + "</strong><span>" + WX.esc(r.en) + "</span></span>" +
       '<span class="taste">' + WX.esc(r.taste) + "</span>" +
-      '<span class="meta"><span class="tag">' + CATS[r.cat].label + '</span><span class="tag plain">' + WX.esc(r.base) + '</span><span class="tag plain">' + WX.esc(r.method) + '</span><span class="abv-dot">酒精度 ' + WX.esc(r.abv) + "</span></span></span></button>";
+      '<span class="meta"><span class="tag">' + CATS[r.cat].label + '</span><span class="tag plain">' + WX.esc(r.base) + '</span><span class="tag plain">' + WX.esc(r.method) + '</span><span class="abv-dot">酒精度 ' + WX.esc(r.abv) + "</span></span>" +
+      '<span class="card-cta">查看完整配方 <span aria-hidden="true">&rarr;</span></span></span></button>';
   }
 
   function filtered() {
@@ -96,13 +97,25 @@
     document.getElementById("mName").textContent = r.name;
     document.getElementById("mEn").textContent = r.en;
     document.getElementById("mTags").innerHTML =
-      '<span class="tag">' + CATS[r.cat].label + '</span> <span class="tag plain">基酒 ' + WX.esc(r.base) + '</span> <span class="tag plain">' + WX.esc(r.method) + '</span> <span class="tag plain">难度 ' + WX.diffStars(r.diff) + '</span> <span class="tag plain">' + WX.esc(r.glass) + '</span> <span class="tag plain">' + WX.esc(r.time) + '</span> <span class="tag plain">酒精度 ' + WX.esc(r.abv) + "</span>";
-    document.getElementById("mRatio").textContent = r.ratio ? "参考比例 " + r.ratio + "（1份≈45ml，饮料同比例放大）" : "单杯参考量，可用下方倍数缩放";
+      '<span class="hero-chip">' + CATS[r.cat].label + '</span>' +
+      '<span class="hero-chip">基酒 ' + WX.esc(r.base) + '</span>' +
+      '<span class="hero-chip">' + WX.esc(r.method) + '</span>';
+    document.getElementById("mFacts").innerHTML = [
+      ["酒精度", r.abv],
+      ["难度", WX.diffStars(r.diff)],
+      ["调制时间", r.time],
+      ["杯型", r.glass],
+      ["参考比例", r.ratio || "单杯"],
+      ["分类", CATS[r.cat].label]
+    ].map(function (f) {
+      return '<div class="hero-fact"><span>' + f[0] + '</span><b>' + WX.esc(f[1]) + '</b></div>';
+    }).join("");
+    document.getElementById("mRatio").textContent = r.ratio ? "参考比例 " + r.ratio + "（1 份约 45ml）" : "单杯参考量，可自由缩放";
     document.getElementById("mIng").innerHTML = ingHTML(r);
     document.getElementById("mSteps").innerHTML = r.steps.map(function (s) { return "<li>" + WX.esc(s) + "</li>"; }).join("");
     document.getElementById("mTaste").textContent = r.taste;
     document.getElementById("mTips").textContent = r.tips;
-    document.getElementById("mGarnish").textContent = r.garnish || "无特殊装饰，冰够就是装饰";
+    document.getElementById("mGarnish").textContent = "装饰：" + (r.garnish || "无特殊装饰，冰够就是装饰");
     document.getElementById("mSource").textContent = "配方来源：" + r.source + " · 比例仅供参考";
     document.getElementById("mMult").textContent = "×" + mult;
   }

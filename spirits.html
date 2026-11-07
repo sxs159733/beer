@@ -96,12 +96,13 @@
 </main>
 
 <dialog id="spiritModal" class="modal" aria-labelledby="sName">
-  <div class="modal-inner" style="position:relative">
+  <div class="modal-inner">
     <button id="sClose" class="modal-close" aria-label="关闭名酒详情">×</button>
-    <div class="modal-body" style="padding-top:30px">
-      <h3 id="sName" style="font-size:calc(26px * var(--site-type, 1));margin-bottom:2px"></h3>
-      <div class="en" id="sEn" style="color:var(--site-muted);font-size:13px;letter-spacing:.14em;margin-bottom:12px"></div>
-      <div id="sFacts" style="display:flex;gap:8px;flex-wrap:wrap"></div>
+    <div class="modal-body spirit-modal-body">
+      <span class="hero-kicker" style="color:var(--site-accent)">TIPSY NOTES · 名酒档案</span>
+      <h3 id="sName" class="spirit-modal-title"></h3>
+      <div class="spirit-modal-en" id="sEn"></div>
+      <div id="sFacts" style="display:flex;gap:8px;flex-wrap:wrap;margin:16px 0 6px"></div>
       <h4>口感</h4>
       <p id="sTaste"></p>
       <h4>怎么酿造</h4>

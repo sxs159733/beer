@@ -57,16 +57,18 @@
   </section>
 </main>
 
-<dialog id="recipeModal" class="modal" aria-labelledby="mName">
-  <div class="modal-inner" style="position:relative">
+<dialog id="recipeModal" class="modal recipe-modal" aria-labelledby="mName">
+  <div class="modal-inner">
     <button id="mClose" class="modal-close" aria-label="关闭配方详情">×</button>
     <div class="modal-hero">
       <div class="pic" id="mPic"></div>
       <div class="info">
+        <span class="hero-kicker">TIPSY NOTES · 配方档案</span>
         <h3 id="mName"></h3>
         <div class="en" id="mEn"></div>
-        <div id="mTags"></div>
-        <p class="small muted" id="mRatio" style="margin:10px 0 0"></p>
+        <div class="hero-rule"></div>
+        <div class="hero-chips" id="mTags"></div>
+        <div class="hero-facts" id="mFacts"></div>
       </div>
     </div>
     <div class="modal-body">
@@ -78,18 +80,35 @@
           <button id="mPlus" aria-label="增加半份">＋</button>
         </span>
         <button class="btn ghost small" id="mCopy">复制配方</button>
+        <span class="ratio-note" id="mRatio"></span>
       </div>
-      <h4>材料</h4>
-      <ul class="ing-list" id="mIng"></ul>
-      <h4>做法</h4>
-      <ol class="steps" id="mSteps"></ol>
-      <h4>口感</h4>
-      <p id="mTaste"></p>
-      <h4>新手提示</h4>
-      <div class="note-box" id="mTips"></div>
-      <h4>装饰</h4>
-      <p class="muted" id="mGarnish"></p>
-      <p class="small muted" id="mSource" style="margin-top:14px"></p>
+
+      <div class="modal-section">
+        <div class="sec-head"><span class="sec-en">01 / INGREDIENTS</span><h4>材料</h4><span class="line"></span></div>
+        <ul class="ing-list" id="mIng"></ul>
+      </div>
+
+      <div class="modal-section">
+        <div class="sec-head"><span class="sec-en">02 / METHOD</span><h4>做法</h4><span class="line"></span></div>
+        <ol class="steps" id="mSteps"></ol>
+      </div>
+
+      <div class="modal-grid-2">
+        <div class="modal-section">
+          <div class="sec-head"><span class="sec-en">03 / PALATE</span><h4>口感</h4><span class="line"></span></div>
+          <blockquote class="taste-quote" id="mTaste"></blockquote>
+        </div>
+        <div class="modal-section">
+          <div class="sec-head"><span class="sec-en">04 / TIPS</span><h4>新手提示</h4><span class="line"></span></div>
+          <div class="note-box" id="mTips"></div>
+        </div>
+      </div>
+
+      <div class="modal-foot">
+        <span class="garnish" id="mGarnish"></span>
+        <span id="mSource"></span>
+      </div>
+      <div class="modal-disclaimer">理性饮酒 · 未成年人禁止饮酒 · 喝酒不开车</div>
     </div>
   </div>
 </dialog>
