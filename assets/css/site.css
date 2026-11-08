@@ -378,6 +378,8 @@ dialog.modal[open] { animation: modalPop .34s cubic-bezier(.2,.8,.3,1) both; }
 .site-footer h4 { color: #f4e8d4; font-family: var(--font-display); margin: 0 0 10px; font-size: 19px; }
 .site-footer a { color: #d8c8ae; }
 .site-footer .legal { border-top: 1px solid #3a2f22; padding-top: 18px; font-size: 13.5px; color: #9b8b74; line-height: 1.9; }
+/* 页脚补充信息：文字色继承 .site-footer（#cbbba4，9.32:1 达 AA），链接继承 .site-footer a（#d8c8ae）；不新增配色 */
+.foot-update, .foot-feedback { margin: 6px 0 0; font-size: 13.5px; color: inherit; }
 
 /* ---------- reveal & misc ---------- */
 .reveal { opacity: 0; transform: translateY(18px); transition: opacity calc(var(--dur) * 3) ease, transform calc(var(--dur) * 3) ease; }
