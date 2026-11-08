@@ -11,7 +11,7 @@
 
   function cardHTML(r) {
     var thumb = r.img
-      ? '<img src="' + r.img + '" alt="' + WX.esc(r.name) + '" loading="lazy">'
+      ? '<img src="' + r.img + '" alt="' + WX.esc(r.name) + '" width="900" height="900" loading="lazy" decoding="async">'
       : WX.glassSVG(r.color);
     return '<button class="recipe-card" data-id="' + r.id + '" aria-haspopup="dialog">' +
       '<span class="thumb">' + thumb + "</span>" +
@@ -92,7 +92,7 @@
   function fillModal(r) {
     current = r;
     document.getElementById("mPic").innerHTML = r.img
-      ? '<img src="' + r.img + '" alt="' + WX.esc(r.name) + '">'
+      ? '<img src="' + r.img + '" alt="' + WX.esc(r.name) + '" width="900" height="900">'
       : WX.glassSVG(r.color);
     document.getElementById("mName").textContent = r.name;
     document.getElementById("mEn").textContent = r.en;
