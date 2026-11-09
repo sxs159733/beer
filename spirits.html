@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>名酒图鉴 · 微醺手册</title>
-<meta name="description" content="九大酒类、33 款代表名酒：白酒、威士忌、白兰地、金酒、朗姆、龙舌兰、伏特加、利口酒、啤酒与葡萄酒。看产区、度数、参考价格、口感与酿造工艺。">
+<meta name="description" content="九大酒类、41 款代表名酒：按名称、酒类与产地、主要原料、酿造方法、香气与口感、酒精度数、常见规格、适饮温度、搭配建议、简要背景与特点统一字段呈现。">
 <link rel="icon" type="image/svg+xml" href="favicon.svg">
 <link rel="stylesheet" href="assets/css/site.css">
 <style>
@@ -63,6 +63,18 @@
 .sp-split { display: grid; grid-template-columns: minmax(0, 1fr) 300px; gap: calc(34px * var(--site-space, 1)); align-items: start; }
 .sp-sticky-figure { position: sticky; top: 92px; }
 
+/* 酒款档案：统一十字段分组 */
+.sp-card-cat { align-self: flex-start; font-size: 12.5px !important; }
+.sp-profile { margin-top: 22px; display: grid; gap: 20px; }
+.sp-group-title { font-family: var(--font-display); font-size: 17px; margin: 0 0 10px; padding-bottom: 8px; border-bottom: 1px solid var(--site-border); }
+.sp-fields { margin: 0; display: grid; grid-template-columns: 1fr 1fr; gap: 10px 18px; }
+.sp-field { display: flex; gap: 10px; align-items: baseline; min-width: 0; font-size: 15px; line-height: 1.8; }
+.sp-field--wide { grid-column: 1 / -1; }
+.sp-field dt { flex: none; width: 86px; font-size: 14px; color: var(--site-muted); }
+.sp-field dd { margin: 0; min-width: 0; }
+.sp-todo { color: var(--site-muted); opacity: .78; }
+.sp-profile-legend { margin: 18px 0 0; font-size: 13.5px; line-height: 1.8; color: var(--site-muted); }
+
 /* 响应式：断点沿用站点 960 / 860 / 620 */
 @media (max-width: 960px) {
   .sp-hero { gap: 26px; }
@@ -83,6 +95,8 @@
   .sp-note { gap: 10px; }
   .sp-note > svg { width: 22px; height: 22px; }
   .sp-icon-card { padding: 18px 20px 22px !important; }
+  .sp-fields { grid-template-columns: 1fr; gap: 8px; }
+  .sp-field dt { width: 80px; }
 }
 </style>
 </head>
@@ -107,9 +121,9 @@
       <div class="sp-hero-copy">
         <span class="eyebrow">Spirits Atlas · 种类 / 产地 / 价格</span>
         <h1>名酒图鉴</h1>
-        <p>九大酒类、33 款代表酒。每一类先讲清「它是怎么来的」，再逐瓶看产区、度数、参考价、口感与用法。价格是公开渠道的常见参考区间，不是报价单——同一瓶酒，渠道、年份与税负都能让数字差出一截。</p>
+        <p>九大酒类、41 款代表酒。每一类先讲清「它是怎么来的」，再逐瓶按统一字段看原料、酿造方法、香气与口感、规格、适饮温度与搭配建议。价格是公开渠道的常见参考区间，不是报价单——同一瓶酒，渠道、年份与税负都能让数字差出一截。</p>
         <p class="sp-hero-hint">建议按「选酒类 → 看酿造工序 → 点卡片读单瓶档案」的顺序逛；想直接找某一瓶，用下面的搜索框搜酒名、产地或风味词。</p>
-        <div class="sp-hero-meta"><span>9 大酒类</span><span>33 款档案</span><span>价格为参考区间</span></div>
+        <div class="sp-hero-meta"><span>9 大酒类</span><span>41 款档案</span><span>10 项统一字段</span><span>价格为参考区间</span></div>
       </div>
       <figure class="sp-figure sp-hero-figure reveal">
         <div class="sp-frame"><img src="assets/img/work-mountain.jpg" width="900" height="900" fetchpriority="high" alt="灰蓝色调的清澈短饮，杯中一颗大冰球，饰柠檬皮与迷迭香"></div>
@@ -121,7 +135,7 @@
   <section class="section">
     <div class="wrap">
       <div class="sp-guide reveal">
-        <p class="muted">按酒类切换：先看右侧「它是怎么来的」和下面那排工序胶囊（从原料处理到装瓶，按顺序排列），再点开任意酒款卡片看产区、度数、口感、酿造与适合怎么喝。左侧配图会跟着酒类一起换。</p>
+        <p class="muted">按酒类切换：先看右侧「它是怎么来的」和下面那排工序胶囊（从原料处理到装瓶，按顺序排列），左侧配图会跟着酒类一起换。点开任意卡片，档案按名称、酒类与产地、主要原料、酿造方法、香气与口感、酒精度数、常见规格、适饮温度、搭配建议、简要背景与特点十项字段分组呈现；暂无可靠来源的字段标「待补充」，不作推测。</p>
       </div>
       <div class="filter-bar">
         <div class="filter-row">
@@ -151,7 +165,7 @@
         <svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="16" cy="16" r="12"/><path d="M16 14v8"/><circle cx="16" cy="10" r="1.2" fill="currentColor" stroke="none"/></svg>
         <div class="sp-note-body">
           <p>价格口径：以 2026 年主流电商与线下商超的常见零售区间为参考，按 500ml / 700ml / 750ml 常规装折算；限量版、单一年份、免税与礼盒装会明显偏离。买酒请认准正规渠道与中文背标，未成年人禁止饮酒。</p>
-          <p class="sp-note-extra">价格只用来做同类横向比较，不构成购买建议；点开任意卡片可看单瓶的完整档案。若与实物酒标或品牌官方信息不一致，以后者为准。</p>
+          <p class="sp-note-extra">价格只用来做同类横向比较，不构成购买建议；点开任意卡片可看单瓶的完整档案。档案字段以品牌官方信息、公开零售页面与本仓库已有资料为准，同一产品在不同市场可能有不同度数与容量，已尽量标注区间；若与实物酒标不一致，以后者为准。</p>
         </div>
       </div>
     </div>
@@ -215,7 +229,7 @@
         <svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="16" cy="16" r="12"/><path d="M16 14v8"/><circle cx="16" cy="10" r="1.2" fill="currentColor" stroke="none"/></svg>
         <div class="sp-note-body">
           <p>说明：本页酒款档案为公开资料整理，价格随市场波动，仅作入门参考。想从调酒开始，请先看 <a href="guide.html">新手入门</a>；想看每类酒的完整做法与口感，点上方卡片。理性饮酒，微醺胜买醉。</p>
-          <p class="sp-note-extra">档案以「认识这一类酒」为目的，不是评级或推荐榜；同名的不同版本请以实物酒标与品牌官方信息为准。</p>
+          <p class="sp-note-extra">档案以「认识这一类酒」为目的，不是评级或推荐榜；新增酒款只收录公开渠道可确认在售的代表产品，同名的不同版本请以实物酒标与品牌官方信息为准。</p>
         </div>
       </div>
     </div>
@@ -230,12 +244,8 @@
       <h3 id="sName" class="spirit-modal-title"></h3>
       <div class="spirit-modal-en" id="sEn"></div>
       <div id="sFacts" style="display:flex;gap:8px;flex-wrap:wrap;margin:16px 0 6px"></div>
-      <h4>口感</h4>
-      <p id="sTaste"></p>
-      <h4>怎么酿造</h4>
-      <p id="sBrew"></p>
-      <h4>怎么喝 / 适合调什么</h4>
-      <p id="sUses"></p>
+      <div id="sProfile" class="sp-profile"></div>
+      <p class="sp-profile-legend">字段口径：名称、酒类与产地、主要原料、酿造方法、香气与口感（含苦甜 / 醇厚度 / 余味）、酒精度数、常见规格、适饮温度、搭配建议、简要背景与特点。标注「待补充」表示暂无可核实的公开来源，不作推测；标注「本类通例」的是该酒类通用做法，不代表某一瓶的具体参数。</p>
     </div>
   </div>
 </dialog>
@@ -253,6 +263,7 @@
 
 <script src="assets/js/data.js"></script>
 <script src="assets/js/site.js"></script>
+<script src="assets/js/spirits-profiles.js"></script>
 <script src="assets/js/spirits.js"></script>
 <script>
 /* 分类配图随标签切换：独立于 spirits.js，只更新图片与图注，不改动任何原有交互 */
