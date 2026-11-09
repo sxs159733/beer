@@ -2,7 +2,7 @@
 
 面向年轻人的家庭调酒手册：47 款可以直接照着做的配方，加上酒的种类、名酒、酿造、产地、价格与文化。纯静态站点，没有构建步骤，改完就能看。
 
-在线站点（GitHub Pages）：https://sxs159733.github.io/weixun-handbook/
+在线站点（GitHub Pages）：https://sxs159733.github.io/beer/
 
 仓库为公开仓库，任何有写权限的协作者都可以直接 clone、修改、推送；推送 `main` 后由 GitHub Actions 自动发布。
 
