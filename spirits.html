@@ -7,6 +7,84 @@
 <meta name="description" content="九大酒类、33 款代表名酒：白酒、威士忌、白兰地、金酒、朗姆、龙舌兰、伏特加、利口酒、啤酒与葡萄酒。看产区、度数、参考价格、口感与酿造工艺。">
 <link rel="icon" type="image/svg+xml" href="favicon.svg">
 <link rel="stylesheet" href="assets/css/site.css">
+<style>
+/* ===== 名酒图鉴页专属配图版式（sp- 前缀，仅本页生效，不改动全站样式） ===== */
+.sp-hero { display: grid; grid-template-columns: 1.15fr 0.85fr; gap: calc(40px * var(--site-space, 1)); align-items: center; }
+.sp-hero-copy p { max-width: 640px; }
+.sp-hero-hint { margin-top: -2px; font-size: 15.5px; color: var(--site-muted); }
+.sp-hero-meta { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 18px; }
+.sp-hero-meta span {
+  font-size: 13.5px; color: var(--site-accent); background: var(--site-surface);
+  border: 1px solid color-mix(in srgb, var(--site-accent) 28%, transparent);
+  border-radius: 999px; padding: 5px 13px;
+}
+.sp-hero-figure { max-width: 420px; margin-left: auto; }
+
+/* 统一图片框：与源图一致用 1:1，零裁切 */
+.sp-figure { margin: 0; }
+.sp-frame {
+  position: relative; aspect-ratio: 1 / 1; overflow: hidden;
+  border-radius: var(--site-radius); border: 1px solid var(--site-border);
+  background: #fff; box-shadow: var(--shadow);
+}
+.sp-frame img { display: block; width: 100%; height: 100%; object-fit: cover; }
+.sp-figure figcaption {
+  margin-top: 10px; padding-left: 12px; border-left: 2px solid var(--gold);
+  font-size: 13.5px; line-height: 1.75; color: var(--site-muted);
+}
+
+/* 图鉴引导 */
+.sp-guide { max-width: 880px; margin-bottom: 20px; }
+.sp-guide p { margin: 0; font-size: 15.5px; line-height: 1.85; }
+
+/* 分类介绍 + 酿造流程：图随标签切换 */
+.sp-intro-split { display: grid; grid-template-columns: 300px minmax(0, 1fr); gap: calc(30px * var(--site-space, 1)); align-items: start; margin-bottom: var(--gap); }
+.sp-intro-split .cat-intro { margin-bottom: 0; }
+.sp-intro-figure { min-width: 0; }
+
+/* 说明条 */
+.sp-note { display: flex; gap: 14px; align-items: flex-start; }
+.sp-note > svg { width: 26px; height: 26px; flex: none; margin-top: 2px; color: var(--site-accent); }
+.sp-note-body { min-width: 0; }
+.sp-note-body p { margin: 0; }
+.sp-note-extra { margin-top: 8px !important; font-size: 14.5px; color: var(--site-muted); }
+
+/* 价格三卡：统一线稿图标 */
+.sp-icon-card { display: flex; flex-direction: column; align-items: flex-start; }
+.sp-icon { width: 30px; height: 30px; margin-bottom: 10px; color: var(--gold); }
+.sp-icon-card p { margin: 0 0 10px; }
+.sp-card-note {
+  font-size: 14px; line-height: 1.75; color: var(--site-accent);
+  background: color-mix(in srgb, var(--site-accent) 7%, transparent);
+  border-radius: 10px; padding: 8px 12px; margin-top: auto !important;
+}
+
+/* 读标：说明 + 侧图 */
+.sp-split { display: grid; grid-template-columns: minmax(0, 1fr) 300px; gap: calc(34px * var(--site-space, 1)); align-items: start; }
+.sp-sticky-figure { position: sticky; top: 92px; }
+
+/* 响应式：断点沿用站点 960 / 860 / 620 */
+@media (max-width: 960px) {
+  .sp-hero { gap: 26px; }
+  .sp-intro-split { grid-template-columns: 250px minmax(0, 1fr); }
+  .sp-split { grid-template-columns: minmax(0, 1fr) 250px; }
+}
+@media (max-width: 860px) {
+  .sp-hero { grid-template-columns: 1fr; }
+  .sp-hero-figure { max-width: 360px; margin: 0; }
+  .sp-intro-split, .sp-split { grid-template-columns: 1fr; }
+  .sp-intro-figure { max-width: 320px; }
+  .sp-sticky-figure { position: static; max-width: 320px; }
+}
+@media (max-width: 620px) {
+  .sp-hero-figure, .sp-intro-figure, .sp-sticky-figure { max-width: 100%; }
+  .sp-frame { box-shadow: 0 6px 18px rgba(64, 45, 20, .10); }
+  .sp-intro-split .cat-intro { padding: 20px 20px 22px; }
+  .sp-note { gap: 10px; }
+  .sp-note > svg { width: 22px; height: 22px; }
+  .sp-icon-card { padding: 18px 20px 22px !important; }
+}
+</style>
 </head>
 <body>
 <header class="site-header">
@@ -25,15 +103,26 @@
 
 <main>
   <section class="page-hero">
-    <div class="wrap">
-      <span class="eyebrow">Spirits Atlas · 种类 / 产地 / 价格</span>
-      <h1>名酒图鉴</h1>
-      <p>九大酒类、33 款代表酒。每一类先讲清「它是怎么来的」，再逐瓶看产区、度数、参考价、口感与用法。价格是公开渠道的常见参考区间，不是报价单——同一瓶酒，渠道、年份与税负都能让数字差出一截。</p>
+    <div class="wrap sp-hero">
+      <div class="sp-hero-copy">
+        <span class="eyebrow">Spirits Atlas · 种类 / 产地 / 价格</span>
+        <h1>名酒图鉴</h1>
+        <p>九大酒类、33 款代表酒。每一类先讲清「它是怎么来的」，再逐瓶看产区、度数、参考价、口感与用法。价格是公开渠道的常见参考区间，不是报价单——同一瓶酒，渠道、年份与税负都能让数字差出一截。</p>
+        <p class="sp-hero-hint">建议按「选酒类 → 看酿造工序 → 点卡片读单瓶档案」的顺序逛；想直接找某一瓶，用下面的搜索框搜酒名、产地或风味词。</p>
+        <div class="sp-hero-meta"><span>9 大酒类</span><span>33 款档案</span><span>价格为参考区间</span></div>
+      </div>
+      <figure class="sp-figure sp-hero-figure reveal">
+        <div class="sp-frame"><img src="assets/img/work-mountain.jpg" width="900" height="900" fetchpriority="high" alt="灰蓝色调的清澈短饮，杯中一颗大冰球，饰柠檬皮与迷迭香"></div>
+        <figcaption>只用大冰球与柠檬皮点缀的一杯：不靠果汁盖味，喝的就是酒本身——这也是图鉴想讲的主角。</figcaption>
+      </figure>
     </div>
   </section>
 
   <section class="section">
     <div class="wrap">
+      <div class="sp-guide reveal">
+        <p class="muted">按酒类切换：先看右侧「它是怎么来的」和下面那排工序胶囊（从原料处理到装瓶，按顺序排列），再点开任意酒款卡片看产区、度数、口感、酿造与适合怎么喝。左侧配图会跟着酒类一起换。</p>
+      </div>
       <div class="filter-bar">
         <div class="filter-row">
           <span class="label">酒类</span>
@@ -49,11 +138,21 @@
         </div>
       </div>
 
-      <div class="cat-intro reveal" id="catIntro"></div>
+      <div class="sp-intro-split">
+        <figure class="sp-figure sp-intro-figure reveal">
+          <div class="sp-frame"><img id="catFigImg" src="assets/img/st-jingredbull.jpg" width="900" height="900" loading="lazy" alt="深红棕色气泡调酒，高杯中细密气泡"></div>
+          <figcaption id="catFigCap">中式烈酒也能做便利店调饮；但这一类的名酒，更值得纯饮慢慢辨香。工序从制曲、固态发酵到陶坛陈贮，是白酒风味的来处。</figcaption>
+        </figure>
+        <div class="cat-intro reveal" id="catIntro"></div>
+      </div>
       <div class="grid cols-3" id="spiritGrid"></div>
 
-      <div class="note-box" style="margin-top:28px">
-        价格口径：以 2026 年主流电商与线下商超的常见零售区间为参考，按 500ml / 700ml / 750ml 常规装折算；限量版、单一年份、免税与礼盒装会明显偏离。买酒请认准正规渠道与中文背标，未成年人禁止饮酒。
+      <div class="note-box sp-note" style="margin-top:28px">
+        <svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="16" cy="16" r="12"/><path d="M16 14v8"/><circle cx="16" cy="10" r="1.2" fill="currentColor" stroke="none"/></svg>
+        <div class="sp-note-body">
+          <p>价格口径：以 2026 年主流电商与线下商超的常见零售区间为参考，按 500ml / 700ml / 750ml 常规装折算；限量版、单一年份、免税与礼盒装会明显偏离。买酒请认准正规渠道与中文背标，未成年人禁止饮酒。</p>
+          <p class="sp-note-extra">价格只用来做同类横向比较，不构成购买建议；点开任意卡片可看单瓶的完整档案。若与实物酒标或品牌官方信息不一致，以后者为准。</p>
+        </div>
       </div>
     </div>
   </section>
@@ -63,12 +162,27 @@
       <div class="section-head reveal">
         <span class="eyebrow">Price · 价差从哪来</span>
         <h2>同一类酒，为什么能从几十卖到几万</h2>
-        <p class="muted">看懂这三件事，就不会被「贵=好喝」牵着走。日常调酒，中端价位往往已经足够。</p>
+        <p class="muted">看懂这三件事，就不会被「贵=好喝」牵着走。日常调酒，中端价位往往已经足够。三张卡分别对应时间、产区、渠道，买之前先想清楚自己在为哪一项付钱。</p>
       </div>
       <div class="grid cols-3">
-        <div class="card reveal" style="padding:22px 24px"><h3>时间成本</h3><p class="muted small">威士忌、干邑、黄酒的价格里，很大一块是「在桶里/坛里躺了多久」。12 年、18 年、25 年不是口味分级，而是蒸发损耗与资金占用的账。无年份（NAS）产品用不同桶龄调配，价格更友好。</p></div>
-        <div class="card reveal" style="padding:22px 24px"><h3>产区与稀缺</h3><p class="muted small">法定产区（如干邑 AOC、苏格兰单一麦芽）限制了产量与工艺；名庄、名窖池、老藤与限量批次叠加品牌溢价。赤水河核心产区、斯佩塞名厂、哈利斯科 100% 蓝龙舌兰，都是溢价关键词。</p></div>
-        <div class="card reveal" style="padding:22px 24px"><h3>渠道与税负</h3><p class="muted small">进口关税、消费税、经销商层级与礼盒包装都会写进价签。同一瓶酒，电商大促、商超日常价、酒吧单杯价可以差 2–4 倍。比价时先确认容量与版本，再比数字。</p></div>
+        <div class="card reveal sp-icon-card" style="padding:22px 24px">
+          <svg class="sp-icon" viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 3h18M7 29h18M9 3v4c0 4 7 6 7 9s-7 5-7 9v4M23 3v4c0 4-7 6-7 9s7 5 7 9v4"/><path d="M12 24h8"/></svg>
+          <h3>时间成本</h3>
+          <p class="muted small">威士忌、干邑、黄酒的价格里，很大一块是「在桶里/坛里躺了多久」。12 年、18 年、25 年不是口味分级，而是蒸发损耗与资金占用的账。无年份（NAS）产品用不同桶龄调配，价格更友好。</p>
+          <p class="sp-card-note">买酒时：先确认标签上的年份指什么，别只为一个数字付钱。</p>
+        </div>
+        <div class="card reveal sp-icon-card" style="padding:22px 24px">
+          <svg class="sp-icon" viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="23" cy="9" r="3.5"/><path d="M3 26l8-11 5 6 4-5 9 10z"/><path d="M3 26h26"/></svg>
+          <h3>产区与稀缺</h3>
+          <p class="muted small">法定产区（如干邑 AOC、苏格兰单一麦芽）限制了产量与工艺；名庄、名窖池、老藤与限量批次叠加品牌溢价。赤水河核心产区、斯佩塞名厂、哈利斯科 100% 蓝龙舌兰，都是溢价关键词。</p>
+          <p class="sp-card-note">买酒时：日常调酒选中端基础款，产区溢价留给纯饮。</p>
+        </div>
+        <div class="card reveal sp-icon-card" style="padding:22px 24px">
+          <svg class="sp-icon" viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 5h11l13 13-11 11L4 16z"/><circle cx="11" cy="11" r="1.6"/><path d="M17 18l6 6"/></svg>
+          <h3>渠道与税负</h3>
+          <p class="muted small">进口关税、消费税、经销商层级与礼盒包装都会写进价签。同一瓶酒，电商大促、商超日常价、酒吧单杯价可以差 2–4 倍。比价时先确认容量与版本，再比数字。</p>
+          <p class="sp-card-note">买酒时：先对齐容量与版本，再看价格数字。</p>
+        </div>
       </div>
     </div>
   </section>
@@ -78,18 +192,31 @@
       <div class="section-head reveal">
         <span class="eyebrow">Label Reading · 读标</span>
         <h2>酒标上真正有用的四行字</h2>
+        <p class="muted">下面四条按瓶身信息的常见顺序排列：先看原料，再看度数，然后产地与年份。点开每一条看具体含义和容易踩的坑，买之前对照实物酒标看一遍就够用。</p>
       </div>
-      <details class="accordion reveal"><summary>原料与配料表：先看有没有「食用酒精」</summary><div class="acc-body">中国白酒分固态法、液态法与固液法。配料只有水和高粱/小麦等粮谷，通常是固态法；出现「食用酒精」「食用香料」，则为液态法或固液法，价格与风味取向不同。威士忌看是否标注单一麦芽（Single Malt）、调和（Blended）；龙舌兰看「100% Agave」。</div></details>
-      <details class="accordion reveal"><summary>酒精度：40% vol 是烈酒的常见门槛</summary><div class="acc-body">中国白酒常见 38–53% vol，威士忌/白兰地/金酒/伏特加多为 40% vol 左右，朗姆 37.5–40%，龙舌兰 38–40%，利口酒 15–30%，啤酒 2.5–8%，葡萄酒 11–15%。调酒时用 40 度基酒 50ml，约等于一瓶 500ml、5 度啤酒的纯酒精量——这是控制节奏的换算尺。</div></details>
-      <details class="accordion reveal"><summary>产地标识：地理标志是风味承诺</summary><div class="acc-body">「苏格兰威士忌」必须在苏格兰蒸馏并陈年至少 3 年；「干邑」必须来自法国干邑区并以特定葡萄双重蒸馏；「香槟」只能是法国香槟区的起泡酒。中国的地理标志产品（如茅台酒、绍兴酒）同样绑定产区。没有这些字样，不代表不好，只是不能拿产区的价格逻辑来套。</div></details>
-      <details class="accordion reveal"><summary>年份与批号：不是所有「年份」都同义</summary><div class="acc-body">葡萄酒的年份指采摘年，反映气候；威士忌标签上的「12 年」指瓶中酒液的最低陈年时间；干邑的 VS/VSOP/XO 分别对应最低 2/4/10 年桶陈；中国白酒的「年份」多为勾调概念，尚无统一强制定义。买之前先弄清这个数字在说哪件事。</div></details>
+      <div class="sp-split">
+        <div class="sp-accordions">
+          <details class="accordion reveal"><summary>原料与配料表：先看有没有「食用酒精」</summary><div class="acc-body">中国白酒分固态法、液态法与固液法。配料只有水和高粱/小麦等粮谷，通常是固态法；出现「食用酒精」「食用香料」，则为液态法或固液法，价格与风味取向不同。威士忌看是否标注单一麦芽（Single Malt）、调和（Blended）；龙舌兰看「100% Agave」。</div></details>
+          <details class="accordion reveal"><summary>酒精度：40% vol 是烈酒的常见门槛</summary><div class="acc-body">中国白酒常见 38–53% vol，威士忌/白兰地/金酒/伏特加多为 40% vol 左右，朗姆 37.5–40%，龙舌兰 38–40%，利口酒 15–30%，啤酒 2.5–8%，葡萄酒 11–15%。调酒时用 40 度基酒 50ml，约等于一瓶 500ml、5 度啤酒的纯酒精量——这是控制节奏的换算尺。</div></details>
+          <details class="accordion reveal"><summary>产地标识：地理标志是风味承诺</summary><div class="acc-body">「苏格兰威士忌」必须在苏格兰蒸馏并陈年至少 3 年；「干邑」必须来自法国干邑区并以特定葡萄双重蒸馏；「香槟」只能是法国香槟区的起泡酒。中国的地理标志产品（如茅台酒、绍兴酒）同样绑定产区。没有这些字样，不代表不好，只是不能拿产区的价格逻辑来套。</div></details>
+          <details class="accordion reveal"><summary>年份与批号：不是所有「年份」都同义</summary><div class="acc-body">葡萄酒的年份指采摘年，反映气候；威士忌标签上的「12 年」指瓶中酒液的最低陈年时间；干邑的 VS/VSOP/XO 分别对应最低 2/4/10 年桶陈；中国白酒的「年份」多为勾调概念，尚无统一强制定义。买之前先弄清这个数字在说哪件事。</div></details>
+        </div>
+        <figure class="sp-figure sp-sticky-figure reveal">
+          <div class="sp-frame"><img src="assets/img/st-rosegrape.jpg" width="900" height="900" loading="lazy" alt="玫瑰红色气泡调酒，满杯冰块，杯口饰玫瑰花瓣与葡萄"></div>
+          <figcaption>杯里的果与香，都能在瓶身那几行字里找到出处：配料、度数、产地、年份。点开左边四条逐项对照。</figcaption>
+        </figure>
+      </div>
     </div>
   </section>
 
   <section class="section" style="padding-top:12px">
     <div class="wrap">
-      <div class="note-box reveal">
-        说明：本页酒款档案为公开资料整理，价格随市场波动，仅作入门参考。想从调酒开始，请先看 <a href="guide.html">新手入门</a>；想看每类酒的完整做法与口感，点上方卡片。理性饮酒，微醺胜买醉。
+      <div class="note-box sp-note reveal">
+        <svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="16" cy="16" r="12"/><path d="M16 14v8"/><circle cx="16" cy="10" r="1.2" fill="currentColor" stroke="none"/></svg>
+        <div class="sp-note-body">
+          <p>说明：本页酒款档案为公开资料整理，价格随市场波动，仅作入门参考。想从调酒开始，请先看 <a href="guide.html">新手入门</a>；想看每类酒的完整做法与口感，点上方卡片。理性饮酒，微醺胜买醉。</p>
+          <p class="sp-note-extra">档案以「认识这一类酒」为目的，不是评级或推荐榜；同名的不同版本请以实物酒标与品牌官方信息为准。</p>
+        </div>
       </div>
     </div>
   </section>
@@ -127,5 +254,36 @@
 <script src="assets/js/data.js"></script>
 <script src="assets/js/site.js"></script>
 <script src="assets/js/spirits.js"></script>
+<script>
+/* 分类配图随标签切换：独立于 spirits.js，只更新图片与图注，不改动任何原有交互 */
+(function () {
+  var CAT_FIG = {
+    baijiu:   { img: "assets/img/st-jingredbull.jpg", alt: "深红棕色气泡调酒，高杯中细密气泡", cap: "中式烈酒也能做便利店调饮；但这一类的名酒，更值得纯饮慢慢辨香。工序从制曲、固态发酵到陶坛陈贮，是白酒风味的来处。" },
+    whisky:   { img: "assets/img/st-oolongdrunk.jpg", alt: "琥珀色短饮，古典杯中大冰，饰柠檬皮与茶叶", cap: "琥珀色来自橡木桶，不是焦糖色素。流程里的「橡木桶陈年」攒出香草、焦糖与烟熏，也占了价格的大半。" },
+    brandy:   { img: "assets/img/st-midnightparis.jpg", alt: "深黑褐色短饮，杯中大冰，饰橙皮与咖啡豆", cap: "葡萄发酵后再蒸馏、入桶，果脯与烘焙香就是这样攒出来的。留意流程胶囊里的「双重蒸馏」。" },
+    vodka:    { img: "assets/img/ice-berrypeach.jpg", alt: "粉红色气泡调酒，满杯冰块，饰草莓与桃片", cap: "无色、干净、几乎不抢味，所以最常做调酒基底。流程里的「活性炭过滤」正是为这件事。" },
+    gin:      { img: "assets/img/sig-grape.jpg", alt: "青绿色短饮，古典杯中大冰，饰青提、薄荷与青柠", cap: "杜松子与草本植物配方各家不同，清亮草本感是它最好认的标签；「再次蒸馏」是关键一步。" },
+    rum:      { img: "assets/img/st-mojito.jpg", alt: "淡绿色气泡调酒，满杯冰块，饰薄荷叶与青柠", cap: "甘蔗汁或糖蜜起家，白朗姆清爽、陈年朗姆厚重；一杯莫吉托就是它最常见的样子。" },
+    tequila:  { img: "assets/img/st-mapleyuzu.jpg", alt: "粉橙色气泡调酒，满杯冰块，饰西柚与橙片", cap: "蓝色韦伯龙舌兰的鳞茎蒸煮后发酵蒸馏，植物感辛烈，常与柑橘、盐搭。买前认准「100% Agave」。" },
+    liqueur:  { img: "assets/img/ice-baileys.jpg", alt: "粉奶色奶系调酒，满杯冰块，杯口一颗草莓", cap: "在基酒里加糖与风味（奶油、水果、咖啡、草本），甜感高、度数跨度大，是调酒的调味库。" },
+    beerwine: { img: "assets/img/st-lemonbeer.jpg", alt: "带把手的啤酒杯，金黄酒液与白色泡沫，杯口一片柠檬", cap: "发酵酒双子星：麦芽与酵母、葡萄糖分，度数低、佐餐强。流程胶囊里的「糖化 / 破碎」是它们的起点。" }
+  };
+  var img = document.getElementById("catFigImg");
+  var cap = document.getElementById("catFigCap");
+  var tabs = document.getElementById("spiritTabs");
+  function setCat(k) {
+    var f = CAT_FIG[k];
+    if (!f) return;
+    img.src = f.img;
+    img.alt = f.alt;
+    cap.textContent = f.cap;
+  }
+  tabs.addEventListener("click", function (e) {
+    var b = e.target.closest("[data-scat]");
+    if (b) setCat(b.getAttribute("data-scat"));
+  });
+  setCat("baijiu");
+})();
+</script>
 </body>
 </html>
