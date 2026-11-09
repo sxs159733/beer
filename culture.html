@@ -7,6 +7,70 @@
 <meta name="description" content="从贾湖古酒到便利店冰杯的九千年酒文化时间线，赤水河、斯佩塞、干邑、哈利斯科等 15 个世界酒产地风土，和诗里的酒与酒桌小规矩。">
 <link rel="icon" type="image/svg+xml" href="favicon.svg">
 <link rel="stylesheet" href="assets/css/site.css">
+<style>
+/* ===== 酒文化页专属配图版式（cul- 前缀，仅本页生效，不改动全站样式） ===== */
+.cul-hero { display: grid; grid-template-columns: 1.15fr 0.85fr; gap: calc(40px * var(--site-space, 1)); align-items: center; }
+.cul-hero-copy p { max-width: 640px; }
+.cul-hero-hint { margin-top: -2px; font-size: 15.5px; color: var(--site-muted); }
+.cul-hero-meta { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 18px; }
+.cul-hero-meta span {
+  font-size: 13.5px; color: var(--site-accent); background: var(--site-surface);
+  border: 1px solid color-mix(in srgb, var(--site-accent) 28%, transparent);
+  border-radius: 999px; padding: 5px 13px;
+}
+.cul-hero-figure { max-width: 420px; margin-left: auto; }
+
+/* 统一图片框：与源图一致用 1:1，零裁切 */
+.cul-figure { margin: 0; }
+.cul-frame {
+  position: relative; aspect-ratio: 1 / 1; overflow: hidden;
+  border-radius: var(--site-radius); border: 1px solid var(--site-border);
+  background: #fff; box-shadow: var(--shadow);
+}
+.cul-frame img { display: block; width: 100%; height: 100%; object-fit: cover; }
+.cul-figure figcaption {
+  margin-top: 10px; padding-left: 12px; border-left: 2px solid var(--gold);
+  font-size: 13.5px; line-height: 1.75; color: var(--site-muted);
+}
+
+/* 时间线 / 文化拾遗：正文 + 侧图 */
+.cul-split { display: grid; grid-template-columns: minmax(0, 1fr) 300px; gap: calc(34px * var(--site-space, 1)); align-items: start; }
+.cul-sticky-figure { position: sticky; top: 92px; }
+
+/* 产地 / 诗词：标题与配图并排 */
+.cul-head-row { display: flex; align-items: center; justify-content: space-between; gap: calc(30px * var(--site-space, 1)); margin-bottom: calc(28px * var(--site-space, 1)); }
+.cul-head-row--reverse { flex-direction: row-reverse; }
+.cul-head-row .section-head { margin-bottom: 0; }
+.cul-figure--sm { width: 210px; flex: none; }
+
+/* 底部说明条 */
+.cul-note { display: flex; gap: 14px; align-items: flex-start; }
+.cul-note > svg { width: 26px; height: 26px; flex: none; margin-top: 2px; color: var(--site-accent); }
+.cul-note-body { min-width: 0; }
+.cul-note-body p { margin: 0; }
+.cul-note-extra { margin-top: 8px !important; font-size: 14.5px; color: var(--site-muted); }
+
+/* 响应式：断点沿用站点 960 / 860 / 620 */
+@media (max-width: 960px) {
+  .cul-hero { gap: 26px; }
+  .cul-split { grid-template-columns: minmax(0, 1fr) 250px; }
+}
+@media (max-width: 860px) {
+  .cul-hero { grid-template-columns: 1fr; }
+  .cul-hero-figure { max-width: 360px; margin: 0; }
+  .cul-split { grid-template-columns: 1fr; }
+  .cul-sticky-figure { position: static; max-width: 320px; }
+  .cul-head-row, .cul-head-row--reverse { flex-direction: column; align-items: flex-start; }
+  .cul-figure--sm { width: 190px; }
+}
+@media (max-width: 620px) {
+  .cul-hero-figure, .cul-sticky-figure { max-width: 100%; }
+  .cul-frame { box-shadow: 0 6px 18px rgba(64, 45, 20, .10); }
+  .cul-figure--sm { width: 180px; }
+  .cul-note { gap: 10px; }
+  .cul-note > svg { width: 22px; height: 22px; }
+}
+</style>
 </head>
 <body>
 <header class="site-header">
@@ -25,10 +89,18 @@
 
 <main>
   <section class="page-hero">
-    <div class="wrap">
-      <span class="eyebrow">Culture &amp; Terroir · 九千年的一杯</span>
-      <h1>酒文化 · 产地</h1>
-      <p>酒从来不只是酒精。它是祭祀的礼器、诗人的下酒句、河谷里的微生物、港口边的橡木桶。这一页沿着时间线看酒怎么走到今天，再按产区看风土如何写进味道，最后读几首关于酒的中国诗。</p>
+    <div class="wrap cul-hero">
+      <div class="cul-hero-copy">
+        <span class="eyebrow">Culture &amp; Terroir · 九千年的一杯</span>
+        <h1>酒文化 · 产地</h1>
+        <p>酒从来不只是酒精。它是祭祀的礼器、诗人的下酒句、河谷里的微生物、港口边的橡木桶。这一页沿着时间线看酒怎么走到今天，再按产区看风土如何写进味道，最后读几首关于酒的中国诗。</p>
+        <p class="cul-hero-hint">建议按「时间线 → 产区 → 诗词 → 酒礼」的顺序读；只想查某个地方，直接用产区标签切换更快。</p>
+        <div class="cul-hero-meta"><span>约 9000 年时间线</span><span>15 个产地</span><span>4 首酒诗</span></div>
+      </div>
+      <figure class="cul-figure cul-hero-figure reveal">
+        <div class="cul-frame"><img src="assets/img/st-autumnmaple.jpg" width="900" height="900" fetchpriority="high" alt="琥珀色气泡调酒，高脚杯中满冰，饰肉桂棒与一片干橙"></div>
+        <figcaption>肉桂、干橙与琥珀色：一杯带秋意的调饮，像这一页要讲的时间——风味是一层层攒出来的。</figcaption>
+      </figure>
     </div>
   </section>
 
@@ -37,18 +109,30 @@
       <div class="section-head reveal">
         <span class="eyebrow">Timeline · 时间线</span>
         <h2>从贾湖陶罐，到便利店的冰杯</h2>
-        <p class="muted">点开任意一个时代，看那一杯酒背后的技术与生活。默认展开第一段。</p>
+        <p class="muted">点开任意一个时代，看那一杯酒背后的技术与生活。默认展开第一段。八段按时间从早到晚排列：先看发酵与酒器，再看蒸馏、作坊与现代评酒体系。</p>
       </div>
-      <div class="timeline" id="timeline"></div>
+      <div class="cul-split">
+        <div class="timeline" id="timeline"></div>
+        <figure class="cul-figure cul-sticky-figure reveal">
+          <div class="cul-frame"><img src="assets/img/st-eveningmaple.jpg" width="900" height="900" loading="lazy" alt="橙黄色气泡调酒，满杯冰块，杯口一片鲜橙"></div>
+          <figcaption>时间线的另一端：便利店冰杯、满杯冰、一片橙。陶罐换成了玻璃杯，喝酒的理由倒没怎么变。</figcaption>
+        </figure>
+      </div>
     </div>
   </section>
 
   <section class="section" style="background:color-mix(in srgb, var(--site-accent) 4%, var(--site-bg))">
     <div class="wrap">
-      <div class="section-head reveal">
-        <span class="eyebrow">Terroir · 产地</span>
-        <h2>风土：同一株葡萄，不同的山坡</h2>
-        <p class="muted">土壤、气候、水源与微生物，决定了原料的糖、酸与香气前体。切换产区标签，看 15 个地方各自酿出了什么。</p>
+      <div class="cul-head-row">
+        <div class="section-head reveal">
+          <span class="eyebrow">Terroir · 产地</span>
+          <h2>风土：同一株葡萄，不同的山坡</h2>
+          <p class="muted">土壤、气候、水源与微生物，决定了原料的糖、酸与香气前体。切换产区标签，看 15 个地方各自酿出了什么；右侧配图与图注会跟着大区一起换。</p>
+        </div>
+        <figure class="cul-figure cul-figure--sm reveal">
+          <div class="cul-frame"><img id="regionFigImg" src="assets/img/sig-lychee.jpg" width="900" height="900" loading="lazy" alt="粉红色短饮，水晶纹古典杯中满冰，饰两颗荔枝与柠檬皮"></div>
+          <figcaption id="regionFigCap">从赤水河的紫色砂页岩到杏花村的黄土地缸：中国的产区，讲的是水、土、曲与窖池微生物。</figcaption>
+        </figure>
       </div>
       <div class="filter-row" id="regionTabs" style="margin-bottom:20px"></div>
       <div class="grid cols-2" id="regionGrid"></div>
@@ -57,10 +141,16 @@
 
   <section class="section">
     <div class="wrap">
-      <div class="section-head reveal">
-        <span class="eyebrow">Poetry · 诗里的酒</span>
-        <h2>古人没有冰箱，但有月亮</h2>
-        <p class="muted">中国诗里的酒，多半不是豪饮，而是一个人对着月亮、雪夜或远方朋友的那一杯。</p>
+      <div class="cul-head-row cul-head-row--reverse">
+        <div class="section-head reveal">
+          <span class="eyebrow">Poetry · 诗里的酒</span>
+          <h2>古人没有冰箱，但有月亮</h2>
+          <p class="muted">中国诗里的酒，多半不是豪饮，而是一个人对着月亮、雪夜或远方朋友的那一杯。下面四首按「独酌 / 边塞 / 邀友 / 问月」的情绪排列，读的是人，不是酒量。</p>
+        </div>
+        <figure class="cul-figure cul-figure--sm reveal">
+          <div class="cul-frame"><img src="assets/img/ice-firstlove.jpg" width="900" height="900" loading="lazy" alt="近乎透明的淡粉调酒，满杯冰块，浮一片桃与一朵小黄花"></div>
+          <figcaption>花、月、雪夜、故人：诗里的那一杯，多半是一个人慢慢喝的。</figcaption>
+        </figure>
       </div>
       <div class="grid cols-2" id="poemGrid"></div>
     </div>
@@ -71,18 +161,31 @@
       <div class="section-head reveal">
         <span class="eyebrow">Notes · 文化拾遗</span>
         <h2>酒桌之外，还有这些讲究</h2>
+        <p class="muted">四条都能直接用在酒桌上：座次与敬酒、酒器怎么变、各国酒礼怎么喝、不懂酒怎么点单。点开看细节；规矩可以变通，「不劝酒」这条不变。</p>
       </div>
-      <details class="accordion reveal"><summary>酒礼与座次：中国酒桌的隐形规则</summary><div class="acc-body">传统宴席讲究「主陪、副陪、主宾、副宾」的座次，敬酒从主宾开始、按顺时针推进；碰杯时杯沿略低于对方是敬意。现代小聚不必照搬，但两条底线值得保留：不强行劝酒，不拿「不喝就是不给面子」绑架别人。真正的酒礼，是让每个人都舒服。</div></details>
-      <details class="accordion reveal"><summary>酒器简史：从青铜爵到玻璃杯</summary><div class="acc-body">商周用青铜爵、角、尊祭祀；汉代流行漆耳杯与羽觞；唐代金银器与瓷盏并行，「葡萄美酒夜光杯」说的正是西域玉杯；宋代建盏、青白瓷把点茶与饮酒分开；明清以后玻璃与瓷器普及。今天调酒用的高球杯、古典杯、马天尼杯，本质都是为温度、气泡与香气服务的容器。</div></details>
-      <details class="accordion reveal"><summary>世界酒礼小对照：清酒、葡萄酒、威士忌</summary><div class="acc-body">日本清酒讲究斟满与互换酒杯，干杯后先小口；法国葡萄酒讲究观色、闻香、品味，倒酒只倒三分之一；苏格兰威士忌可以加水或冰，但纯饮时先闻后抿。规则各不相同，共同点是：慢一点，让酒在杯里多待一会儿。</div></details>
-      <details class="accordion reveal"><summary>酒吧点单：不懂酒也能点得体面</summary><div class="acc-body">告诉调酒师三件事：喜欢的基酒（或「没有偏好」）、酸甜偏好（偏酸/偏甜/清爽/浓烈）、酒精强度（低度/标准/烈）。不知道点什么，就从金汤力、威士忌高球或莫吉托开始——这三杯几乎不会踩雷。不想喝酒时，点无酒精特调也完全正常。</div></details>
+      <div class="cul-split">
+        <div class="cul-accordions">
+          <details class="accordion reveal"><summary>酒礼与座次：中国酒桌的隐形规则</summary><div class="acc-body">传统宴席讲究「主陪、副陪、主宾、副宾」的座次，敬酒从主宾开始、按顺时针推进；碰杯时杯沿略低于对方是敬意。现代小聚不必照搬，但两条底线值得保留：不强行劝酒，不拿「不喝就是不给面子」绑架别人。真正的酒礼，是让每个人都舒服。</div></details>
+          <details class="accordion reveal"><summary>酒器简史：从青铜爵到玻璃杯</summary><div class="acc-body">商周用青铜爵、角、尊祭祀；汉代流行漆耳杯与羽觞；唐代金银器与瓷盏并行，「葡萄美酒夜光杯」说的正是西域玉杯；宋代建盏、青白瓷把点茶与饮酒分开；明清以后玻璃与瓷器普及。今天调酒用的高球杯、古典杯、马天尼杯，本质都是为温度、气泡与香气服务的容器。</div></details>
+          <details class="accordion reveal"><summary>世界酒礼小对照：清酒、葡萄酒、威士忌</summary><div class="acc-body">日本清酒讲究斟满与互换酒杯，干杯后先小口；法国葡萄酒讲究观色、闻香、品味，倒酒只倒三分之一；苏格兰威士忌可以加水或冰，但纯饮时先闻后抿。规则各不相同，共同点是：慢一点，让酒在杯里多待一会儿。</div></details>
+          <details class="accordion reveal"><summary>酒吧点单：不懂酒也能点得体面</summary><div class="acc-body">告诉调酒师三件事：喜欢的基酒（或「没有偏好」）、酸甜偏好（偏酸/偏甜/清爽/浓烈）、酒精强度（低度/标准/烈）。不知道点什么，就从金汤力、威士忌高球或莫吉托开始——这三杯几乎不会踩雷。不想喝酒时，点无酒精特调也完全正常。</div></details>
+        </div>
+        <figure class="cul-figure cul-sticky-figure reveal">
+          <div class="cul-frame"><img src="assets/img/work-love.jpg" width="900" height="900" loading="lazy" alt="粉红色气泡调酒，高脚杯中满冰，饰玫瑰花瓣与一颗樱桃"></div>
+          <figcaption>酒礼、酒器、点单，说到底都是同一件事：让桌上每个人都舒服。杯沿低一点，话少劝一句，就够了。</figcaption>
+        </figure>
+      </div>
     </div>
   </section>
 
   <section class="section" style="padding-top:12px">
     <div class="wrap">
-      <div class="note-box reveal">
-        想把这些产地装进杯子？去 <a href="mix.html">调酒实验室</a> 找配方，或到 <a href="spirits.html">名酒图鉴</a> 看每类酒的工艺与价格。理性饮酒，微醺胜买醉。
+      <div class="note-box cul-note reveal">
+        <svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="16" cy="16" r="12"/><path d="M16 14v8"/><circle cx="16" cy="10" r="1.2" fill="currentColor" stroke="none"/></svg>
+        <div class="cul-note-body">
+          <p>想把这些产地装进杯子？去 <a href="mix.html">调酒实验室</a> 找配方，或到 <a href="spirits.html">名酒图鉴</a> 看每类酒的工艺与价格。理性饮酒，微醺胜买醉。</p>
+          <p class="cul-note-extra">文化与产地内容整理自公开资料，引诗以通行版本为准；年代与产区界定请以考古研究和法定产区文件为准。</p>
+        </div>
       </div>
     </div>
   </section>
@@ -102,5 +205,31 @@
 <script src="assets/js/data.js"></script>
 <script src="assets/js/site.js"></script>
 <script src="assets/js/culture.js"></script>
+<script>
+/* 产区配图随大区标签切换：独立于 culture.js，只更新图片与图注，不改动任何原有交互 */
+(function () {
+  var REGION_FIG = {
+    cn: { img: "assets/img/sig-lychee.jpg", alt: "粉红色短饮，水晶纹古典杯中满冰，饰两颗荔枝与柠檬皮", cap: "从赤水河的紫色砂页岩到杏花村的黄土地缸：中国的产区，讲的是水、土、曲与窖池微生物。" },
+    eu: { img: "assets/img/sig-pear.jpg", alt: "金黄短饮，水晶纹古典杯中满冰，饰雪梨片与迷迭香", cap: "从斯佩塞的雪莉桶到干邑的白垩土：欧洲用法定产区，把气候与工艺一起写进了名字里。" },
+    am: { img: "assets/img/work-beach.jpg", alt: "蓝绿色调酒，满杯冰块，饰菠萝块与一把小纸伞", cap: "从哈利斯科的蓝色龙舌兰到加勒比的甘蔗：阳光与热带作物，决定这一区的甜与辛。" },
+    as: { img: "assets/img/st-jinrolemon.jpg", alt: "透明淡黄绿气泡调酒，古典杯中满冰，杯口一片柠檬", cap: "从清酒、真露到便利店冰杯：亚洲的新现场更在意清爽、易饮与随手可得。" }
+  };
+  var img = document.getElementById("regionFigImg");
+  var cap = document.getElementById("regionFigCap");
+  var tabs = document.getElementById("regionTabs");
+  function setRegion(k) {
+    var f = REGION_FIG[k];
+    if (!f) return;
+    img.src = f.img;
+    img.alt = f.alt;
+    cap.textContent = f.cap;
+  }
+  tabs.addEventListener("click", function (e) {
+    var b = e.target.closest("[data-region]");
+    if (b) setRegion(b.getAttribute("data-region"));
+  });
+  setRegion("cn");
+})();
+</script>
 </body>
 </html>
