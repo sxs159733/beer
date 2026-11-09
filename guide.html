@@ -7,6 +7,93 @@
 <meta name="description" content="非专业选手的家庭调酒第一课：装备清单、直调/摇和/搅拌/捣压四种手法、新手避坑指南、术语小词典与第一瓶基酒建议。">
 <link rel="icon" type="image/svg+xml" href="favicon.svg">
 <link rel="stylesheet" href="assets/css/site.css">
+<style>
+/* ===== 新手入门页专属配图版式（g- 前缀，仅本页生效，不改动全站样式） ===== */
+.g-hero { display: grid; grid-template-columns: 1.15fr 0.85fr; gap: calc(40px * var(--site-space, 1)); align-items: center; }
+.g-hero-copy p { max-width: 620px; }
+.g-hero-hint { margin-top: -2px; font-size: 15.5px; color: var(--site-muted); }
+.g-hero-meta { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 18px; }
+.g-hero-meta span {
+  font-size: 13.5px; color: var(--site-accent); background: var(--site-surface);
+  border: 1px solid color-mix(in srgb, var(--site-accent) 28%, transparent);
+  border-radius: 999px; padding: 5px 13px;
+}
+.g-hero-figure { max-width: 420px; margin-left: auto; }
+
+/* 统一图片框：与源图一致用 1:1，零裁切 */
+.g-figure { margin: 0; }
+.g-frame {
+  position: relative; aspect-ratio: 1 / 1; overflow: hidden;
+  border-radius: var(--site-radius); border: 1px solid var(--site-border);
+  background: #fff; box-shadow: var(--shadow);
+}
+.g-frame img { display: block; width: 100%; height: 100%; object-fit: cover; }
+.g-figure figcaption {
+  margin-top: 10px; padding-left: 12px; border-left: 2px solid var(--gold);
+  font-size: 13.5px; line-height: 1.75; color: var(--site-muted);
+}
+
+/* 两栏图文 */
+.g-split { display: grid; gap: calc(34px * var(--site-space, 1)); align-items: start; }
+.g-split--kit { grid-template-columns: 340px minmax(0, 1fr); }
+.g-split--pitfalls { grid-template-columns: minmax(0, 1fr) 320px; }
+.g-aside { margin: 16px 0 0; font-size: 14.5px; line-height: 1.85; color: var(--site-muted); }
+.g-sticky-figure { position: sticky; top: 92px; }
+
+/* 安全提示：图标 + 原文 */
+.g-safety { display: flex; gap: 16px; align-items: flex-start; }
+.g-safety-icon { width: 34px; height: 34px; flex: none; margin-top: 2px; }
+.g-safety-copy { min-width: 0; }
+.g-safety-note { margin: 10px 0 0; font-size: 14.5px; line-height: 1.8; color: #ffd9ae; opacity: .94; }
+
+/* 手法面板：步骤 + 示例图 */
+.g-tech-grid { display: grid; grid-template-columns: minmax(0, 1fr) 320px; gap: calc(30px * var(--site-space, 1)); align-items: start; }
+.g-tech-lead { font-size: 16px; line-height: 1.8; margin: 0 0 18px; }
+.g-tech-figure { align-self: start; }
+
+/* 术语区标题与配图并排 */
+.g-head-row { display: flex; align-items: center; justify-content: space-between; gap: calc(30px * var(--site-space, 1)); margin-bottom: calc(28px * var(--site-space, 1)); }
+.g-head-row .section-head { margin-bottom: 0; }
+.g-head-figure { width: 210px; flex: none; }
+
+/* 第一瓶：图文卡片 */
+.g-bottle-card { display: flex; flex-direction: column; }
+.g-bottle-card .g-frame { border: 0; border-bottom: 1px solid var(--site-border); border-radius: 0; box-shadow: none; }
+.g-bottle-body { flex: 1; display: flex; flex-direction: column; align-items: flex-start; gap: 4px; padding: 20px 24px 24px; }
+.g-bottle-body h3 { margin: 6px 0 4px; }
+.g-bottle-body p { margin: 0 0 8px; }
+.g-bottle-tip {
+  font-size: 14px; line-height: 1.75; color: var(--site-accent);
+  background: color-mix(in srgb, var(--site-accent) 7%, transparent);
+  border-radius: 10px; padding: 8px 12px;
+}
+.g-bottle-body a { margin-top: auto; padding-top: 8px; }
+
+/* 响应式：断点沿用站点 960 / 860 / 620 */
+@media (max-width: 960px) {
+  .g-hero { gap: 26px; }
+  .g-split--kit { grid-template-columns: 280px minmax(0, 1fr); }
+  .g-split--pitfalls { grid-template-columns: minmax(0, 1fr) 260px; }
+  .g-tech-grid { grid-template-columns: minmax(0, 1fr) 260px; }
+}
+@media (max-width: 860px) {
+  .g-hero { grid-template-columns: 1fr; }
+  .g-hero-figure { max-width: 360px; margin: 0; }
+  .g-split--kit, .g-split--pitfalls, .g-tech-grid { grid-template-columns: 1fr; }
+  .g-split--kit > .g-figure { max-width: 340px; }
+  .g-sticky-figure { position: static; max-width: 320px; }
+  .g-tech-figure { max-width: 340px; }
+}
+@media (max-width: 620px) {
+  .g-head-row { flex-direction: column; align-items: flex-start; gap: 20px; }
+  .g-head-figure { width: 180px; }
+  .g-hero-figure, .g-split--kit > .g-figure, .g-sticky-figure, .g-tech-figure { max-width: 100%; }
+  .g-frame { box-shadow: 0 6px 18px rgba(64, 45, 20, .10); }
+  .g-safety { gap: 12px; }
+  .g-safety-icon { width: 28px; height: 28px; }
+  .g-bottle-body { padding: 18px 20px 22px; }
+}
+</style>
 </head>
 <body>
 <header class="site-header">
@@ -25,17 +112,32 @@
 
 <main>
   <section class="page-hero">
-    <div class="wrap">
-      <span class="eyebrow">First Drink · 非专业选手友好</span>
-      <h1>新手入门</h1>
-      <p>不需要吧台、不需要证照。这一页解决三件事：买什么、怎么调、怎么不翻车。看完就可以去楼下便利店采购了。</p>
+    <div class="wrap g-hero">
+      <div class="g-hero-copy">
+        <span class="eyebrow">First Drink · 非专业选手友好</span>
+        <h1>新手入门</h1>
+        <p>不需要吧台、不需要证照。这一页解决三件事：买什么、怎么调、怎么不翻车。看完就可以去楼下便利店采购了。</p>
+        <p class="g-hero-hint">按「装备 → 手法 → 避坑」的顺序读，约 5 分钟；术语一时记不住可以先跳过，调两杯回来再查更快。</p>
+        <div class="g-hero-meta"><span>阅读约 5 分钟</span><span>零基础可跟做</span><span>器具有家常替代</span></div>
+      </div>
+      <figure class="g-figure g-hero-figure reveal">
+        <div class="g-frame"><img src="assets/img/st-lemonvodka.jpg" width="900" height="900" fetchpriority="high" alt="满杯冰块的气泡调酒，杯口点缀柠檬片与薄荷叶"></div>
+        <figcaption>便利店就能凑齐的第一杯：满杯冰、柠檬片与气泡水，直调一分钟完成。</figcaption>
+      </figure>
     </div>
   </section>
 
   <section class="section" style="padding-bottom:20px">
     <div class="wrap">
-      <div class="warn-banner reveal">
-        <strong>开始之前的硬规则：</strong>未成年人禁止饮酒；喝酒不开车、开车不喝酒；服药期间不饮酒（尤其头孢类、甲硝唑等，双硫仑反应可危及生命）；咖啡、红牛等功能饮料混酒会掩盖醉意、加重心脏负担；甜感≠无酒精，微醺即止，不劝酒。
+      <div class="warn-banner g-safety reveal">
+        <svg class="g-safety-icon" viewBox="0 0 32 32" fill="none" stroke="#ffd9ae" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <path d="M16 3 27 7v9c0 7-5 11-11 13-6-2-11-6-11-13V7Z"/>
+          <path d="M16 11v7"/><circle cx="16" cy="22.5" r="1.15" fill="#ffd9ae" stroke="none"/>
+        </svg>
+        <div class="g-safety-copy">
+          <strong>开始之前的硬规则：</strong>未成年人禁止饮酒；喝酒不开车、开车不喝酒；服药期间不饮酒（尤其头孢类、甲硝唑等，双硫仑反应可危及生命）；咖啡、红牛等功能饮料混酒会掩盖醉意、加重心脏负担；甜感≠无酒精，微醺即止，不劝酒。
+          <p class="g-safety-note">这一页所有内容都以「成年、不驾车、不服药、适量」为前提。任何一条不满足，今天就先不调了。</p>
+        </div>
       </div>
     </div>
   </section>
@@ -45,18 +147,27 @@
       <div class="section-head reveal">
         <span class="eyebrow">Kit · 装备清单</span>
         <h2>先凑齐这八样，再谈装备升级</h2>
-        <p class="muted">勾选会保存在你自己的浏览器里。括号内是平价替代方案——调酒的第一原则是"先喝起来"。</p>
+        <p class="muted">勾选会保存在你自己的浏览器里。括号内是平价替代方案——调酒的第一原则是"先喝起来"。八样不必一次买齐：先有冰、杯子、酸和基酒就能开调，其余用家里现成的顶上。</p>
       </div>
-      <ul class="check-list" id="kitList">
-        <li><label><input type="checkbox" data-kit="ice"><span class="t">冰杯 / 大冰格<span class="d">便利店冰杯约3–5元；在家用大格硅胶模冻冰，化水慢。约¥0–5/杯</span></span></label></li>
-        <li><label><input type="checkbox" data-kit="jigger"><span class="t">量酒器（或瓶盖）<span class="d">不锈钢双头量酒器约¥15；小酒版瓶盖≈5ml、一瓶盖洋酒≈45ml可应急。</span></span></label></li>
-        <li><label><input type="checkbox" data-kit="shaker"><span class="t">摇壶（或密封水杯）<span class="d">波士顿摇壶约¥40；带盖运动水杯/梅森罐完全能摇，注意按住盖子。</span></span></label></li>
-        <li><label><input type="checkbox" data-kit="spoon"><span class="t">吧勺（或长筷）<span class="d">搅拌与分层用；长柄筷、奶茶勺都行，分层时勺背贴杯壁慢倒。</span></span></label></li>
-        <li><label><input type="checkbox" data-kit="strainer"><span class="t">滤网（或漏勺）<span class="d">摇完滤掉碎冰与果渣；厨房小漏勺垫在杯口即可。</span></span></label></li>
-        <li><label><input type="checkbox" data-kit="citrus"><span class="t">柠檬 / 青柠<span class="d">酸是平衡甜与烈的关键；现挤比瓶装汁香一个量级。约¥3–6/个</span></span></label></li>
-        <li><label><input type="checkbox" data-kit="syrup"><span class="t">糖浆（自制1:1）<span class="d">白砂糖:热水=1:1搅溶冷却，装瓶冷藏两周；比直接加糖溶解均匀。</span></span></label></li>
-        <li><label><input type="checkbox" data-kit="base"><span class="t">第一瓶基酒<span class="d">伏特加（百搭不出错）或白朗姆（莫吉托/自由古巴），小酒版50ml先试。约¥10–90</span></span></label></li>
-      </ul>
+      <div class="g-split g-split--kit">
+        <figure class="g-figure reveal">
+          <div class="g-frame"><img src="assets/img/ice-orange.jpg" width="900" height="900" loading="lazy" alt="橙色气泡调酒，杯中满冰，杯口饰一片橙子"></div>
+          <figcaption>一杯便利店直调的成品：满杯冰、一片橙、一点气泡。清单里的东西，大半都在这张图里。</figcaption>
+        </figure>
+        <div>
+          <ul class="check-list" id="kitList">
+            <li><label><input type="checkbox" data-kit="ice"><span class="t">冰杯 / 大冰格<span class="d">便利店冰杯约3–5元；在家用大格硅胶模冻冰，化水慢。约¥0–5/杯</span></span></label></li>
+            <li><label><input type="checkbox" data-kit="jigger"><span class="t">量酒器（或瓶盖）<span class="d">不锈钢双头量酒器约¥15；小酒版瓶盖≈5ml、一瓶盖洋酒≈45ml可应急。</span></span></label></li>
+            <li><label><input type="checkbox" data-kit="shaker"><span class="t">摇壶（或密封水杯）<span class="d">波士顿摇壶约¥40；带盖运动水杯/梅森罐完全能摇，注意按住盖子。</span></span></label></li>
+            <li><label><input type="checkbox" data-kit="spoon"><span class="t">吧勺（或长筷）<span class="d">搅拌与分层用；长柄筷、奶茶勺都行，分层时勺背贴杯壁慢倒。</span></span></label></li>
+            <li><label><input type="checkbox" data-kit="strainer"><span class="t">滤网（或漏勺）<span class="d">摇完滤掉碎冰与果渣；厨房小漏勺垫在杯口即可。</span></span></label></li>
+            <li><label><input type="checkbox" data-kit="citrus"><span class="t">柠檬 / 青柠<span class="d">酸是平衡甜与烈的关键；现挤比瓶装汁香一个量级。约¥3–6/个</span></span></label></li>
+            <li><label><input type="checkbox" data-kit="syrup"><span class="t">糖浆（自制1:1）<span class="d">白砂糖:热水=1:1搅溶冷却，装瓶冷藏两周；比直接加糖溶解均匀。</span></span></label></li>
+            <li><label><input type="checkbox" data-kit="base"><span class="t">第一瓶基酒<span class="d">伏特加（百搭不出错）或白朗姆（莫吉托/自由古巴），小酒版50ml先试。约¥10–90</span></span></label></li>
+          </ul>
+          <p class="g-aside">勾选状态只存在这台设备的浏览器里，换设备或清理缓存后不会同步，也不会上传。价格是写这份清单时的粗略参考，按当地便利店为准。</p>
+        </div>
+      </div>
     </div>
   </section>
 
@@ -65,6 +176,7 @@
       <div class="section-head reveal">
         <span class="eyebrow">Techniques · 四种手法</span>
         <h2>手法只有四种，配方千变万化</h2>
+        <p class="muted">四种手法对应四类配方：点下面的标签切换，步骤、要点和示例图会一起换。先把直调练熟，再往上加难度——多数便利店配方一辈子用不上摇壶。</p>
       </div>
       <div class="filter-row" id="techTabs" style="margin-bottom:16px"></div>
       <div class="tech-panel reveal" id="techPanel"></div>
@@ -76,22 +188,37 @@
       <div class="section-head reveal">
         <span class="eyebrow">Pitfalls · 避坑指南</span>
         <h2>翻车的六个元凶，配方帖不会写</h2>
-        <p class="muted">照着毫升数调还是不对味？问题通常不在配方，在这些隐藏变量。</p>
+        <p class="muted">照着毫升数调还是不对味？问题通常不在配方，在这些隐藏变量。按出现频率排序，建议从第一条「冰不够」开始自查；点开每条看原因和怎么改。</p>
       </div>
-      <details class="accordion reveal"><summary>冰不够：喝到第三口就变水味</summary><div class="acc-body">冰少→化水快→酒被稀释且温度上升，酒精感反而冲。杯中冰加到满杯是标准操作；摇壶里的"操作冰"另备，滤掉不入杯。大冰块比碎冰化得慢，纯饮/搅拌类优先大冰。</div></details>
-      <details class="accordion reveal"><summary>比例照抄：你的果汁和他的不一样甜</summary><div class="acc-body">不同品牌果汁甜度差很多，NFC 和复原汁也不同。先按配方调，尝一口：太甜加柠檬汁或苏打，太烈加饮料，太酸加糖浆。配方是起点不是法律。</div></details>
-      <details class="accordion reveal"><summary>把苏打/汤力倒进摇壶：喷一身</summary><div class="acc-body">带气饮料只能最后直调入杯、轻拌或轻提一次。摇壶里摇苏打=加压炸弹，开盖瞬间喷天花板。同理啤酒也不摇。</div></details>
-      <details class="accordion reveal"><summary>奶 + 酸 = 絮状物：看着像坏了</summary><div class="acc-body">百利甜、旺仔、椰乳遇到柠檬汁等强酸会蛋白絮化，口感沙、观感差。奶系配方别加酸；想清爽选椰水而非椰奶。轻微絮状搅匀可喝，但别请客时端出来。</div></details>
-      <details class="accordion reveal"><summary>甜 = 没酒？果汁是最危险的伪装</summary><div class="acc-body">40度伏特加被果汁压住味道后，摄入速度会远超纯饮。记一个硬上限：50ml 小酒版≈一瓶啤酒的酒精量；一晚两杯以内是多数人的微醺区间。强爽、果立方本身就有度数，叠加前先读瓶身。</div></details>
-      <details class="accordion reveal"><summary>杯子不冰：香气和气泡都跑得快</summary><div class="acc-body">调酒前把杯子冻10分钟，或加冰搅拌降温后倒掉化水再调。温度低→气泡稳→香气收得住，同一配方能好喝一个档次。这是零成本提升。</div></details>
+      <div class="g-split g-split--pitfalls">
+        <div class="g-accordions">
+          <details class="accordion reveal"><summary>冰不够：喝到第三口就变水味</summary><div class="acc-body">冰少→化水快→酒被稀释且温度上升，酒精感反而冲。杯中冰加到满杯是标准操作；摇壶里的"操作冰"另备，滤掉不入杯。大冰块比碎冰化得慢，纯饮/搅拌类优先大冰。</div></details>
+          <details class="accordion reveal"><summary>比例照抄：你的果汁和他的不一样甜</summary><div class="acc-body">不同品牌果汁甜度差很多，NFC 和复原汁也不同。先按配方调，尝一口：太甜加柠檬汁或苏打，太烈加饮料，太酸加糖浆。配方是起点不是法律。</div></details>
+          <details class="accordion reveal"><summary>把苏打/汤力倒进摇壶：喷一身</summary><div class="acc-body">带气饮料只能最后直调入杯、轻拌或轻提一次。摇壶里摇苏打=加压炸弹，开盖瞬间喷天花板。同理啤酒也不摇。</div></details>
+          <details class="accordion reveal"><summary>奶 + 酸 = 絮状物：看着像坏了</summary><div class="acc-body">百利甜、旺仔、椰乳遇到柠檬汁等强酸会蛋白絮化，口感沙、观感差。奶系配方别加酸；想清爽选椰水而非椰奶。轻微絮状搅匀可喝，但别请客时端出来。</div></details>
+          <details class="accordion reveal"><summary>甜 = 没酒？果汁是最危险的伪装</summary><div class="acc-body">40度伏特加被果汁压住味道后，摄入速度会远超纯饮。记一个硬上限：50ml 小酒版≈一瓶啤酒的酒精量；一晚两杯以内是多数人的微醺区间。强爽、果立方本身就有度数，叠加前先读瓶身。</div></details>
+          <details class="accordion reveal"><summary>杯子不冰：香气和气泡都跑得快</summary><div class="acc-body">调酒前把杯子冻10分钟，或加冰搅拌降温后倒掉化水再调。温度低→气泡稳→香气收得住，同一配方能好喝一个档次。这是零成本提升。</div></details>
+        </div>
+        <figure class="g-figure g-sticky-figure reveal">
+          <div class="g-frame"><img src="assets/img/ice-boomgrape.jpg" width="900" height="900" loading="lazy" alt="深紫红色气泡调酒，满杯冰块，杯口挂着两颗黑葡萄"></div>
+          <figcaption>深色果汁加气泡最容易藏住酒味：好喝，也最容易喝快。这一杯正好对应下面第 3、5 条。</figcaption>
+        </figure>
+      </div>
     </div>
   </section>
 
   <section class="section" style="padding-top:12px">
     <div class="wrap">
-      <div class="section-head reveal">
-        <span class="eyebrow">Glossary · 术语小词典</span>
-        <h2>看懂配方帖里的黑话</h2>
+      <div class="g-head-row">
+        <div class="section-head reveal">
+          <span class="eyebrow">Glossary · 术语小词典</span>
+          <h2>看懂配方帖里的黑话</h2>
+          <p class="muted">看不懂的先跳过，调两杯回来再查更快。右边这杯最简单的经典直调，已经把「基酒、直调、装饰」三件事摆在眼前了。</p>
+        </div>
+        <figure class="g-figure g-head-figure reveal">
+          <div class="g-frame"><img src="assets/img/cl-screwdriver.jpg" width="900" height="900" loading="lazy" alt="橙色直调鸡尾酒，满杯冰块，杯口一片橙子"></div>
+          <figcaption>基酒 + 果汁 + 冰 + 装饰：一杯里能认出好几个词条。</figcaption>
+        </figure>
       </div>
       <dl class="glossary">
         <div class="card reveal"><dt>基酒 Base</dt><dd>一杯鸡尾酒的酒精骨架：伏特加、金酒、朗姆、威士忌、白兰地、龙舌兰六大经典，中式白酒/梅酒/枫酒是新玩家。</dd></div>
@@ -109,14 +236,42 @@
       <div class="section-head reveal">
         <span class="eyebrow">First Bottle · 第一瓶买什么</span>
         <h2>三选一，都不会吃灰</h2>
+        <p class="muted">预算有限就先买 50ml 小酒版试味，确认喝得惯再上大瓶。下面三张图，分别是它们最经典、也最容易在家复刻的一杯。</p>
       </div>
       <div class="grid cols-3">
-        <div class="card reveal" style="padding:22px 24px"><h3>伏特加</h3><p class="muted small">无色无杂味、百搭不出错，小酒版最容易买到。柠檬伏特加、莓桃伏特加、螺丝刀、伏特加苏打全靠它。新手踩雷概率最低的第一瓶。</p><a class="small" href="spirits.html">看伏特加档案 →</a></div>
-        <div class="card reveal" style="padding:22px 24px"><h3>白朗姆</h3><p class="muted small">一瓶百加得五六十元，自由古巴、莫吉托、椰海浮光、橙香微醺全解锁；甘蔗甜香和果汁汽水天生合拍。</p><a class="small" href="spirits.html">看朗姆档案 →</a></div>
-        <div class="card reveal" style="padding:22px 24px"><h3>金酒</h3><p class="muted small">想喝"有香气"的选它：金汤力、乌龙醉、青提山风。杜松子草本感让无糖茶和汤力水都变高级。</p><a class="small" href="spirits.html">看金酒档案 →</a></div>
+        <div class="card reveal g-bottle-card">
+          <div class="g-frame"><img src="assets/img/cl-vodkasoda.jpg" width="900" height="900" loading="lazy" alt="无色透明的气泡调酒，满杯冰块，杯口一片柠檬"></div>
+          <div class="g-bottle-body">
+            <span class="tag">最稳妥</span>
+            <h3>伏特加</h3>
+            <p class="muted small">无色无杂味、百搭不出错，小酒版最容易买到。柠檬伏特加、莓桃伏特加、螺丝刀、伏特加苏打全靠它。新手踩雷概率最低的第一瓶。</p>
+            <p class="g-bottle-tip">第一杯建议：伏特加苏打 1:3，挤一片柠檬，满杯冰。</p>
+            <a class="small" href="spirits.html">看伏特加档案 →</a>
+          </div>
+        </div>
+        <div class="card reveal g-bottle-card">
+          <div class="g-frame"><img src="assets/img/cl-cuba.jpg" width="900" height="900" loading="lazy" alt="深棕色可乐色调酒，满杯冰块，杯口一角青柠"></div>
+          <div class="g-bottle-body">
+            <span class="tag">解锁最多</span>
+            <h3>白朗姆</h3>
+            <p class="muted small">一瓶百加得五六十元，自由古巴、莫吉托、椰海浮光、橙香微醺全解锁；甘蔗甜香和果汁汽水天生合拍。</p>
+            <p class="g-bottle-tip">第一杯建议：自由古巴，朗姆 + 可乐 + 青柠，直调即可。</p>
+            <a class="small" href="spirits.html">看朗姆档案 →</a>
+          </div>
+        </div>
+        <div class="card reveal g-bottle-card">
+          <div class="g-frame"><img src="assets/img/cl-gintonic.jpg" width="900" height="900" loading="lazy" alt="淡绿色金汤力，满杯冰块，饰青柠、蓝莓与迷迭香"></div>
+          <div class="g-bottle-body">
+            <span class="tag">香气派</span>
+            <h3>金酒</h3>
+            <p class="muted small">想喝"有香气"的选它：金汤力、乌龙醉、青提山风。杜松子草本感让无糖茶和汤力水都变高级。</p>
+            <p class="g-bottle-tip">第一杯建议：金汤力 1:3，汤力水沿杯壁慢倒保气泡。</p>
+            <a class="small" href="spirits.html">看金酒档案 →</a>
+          </div>
+        </div>
       </div>
       <div class="note-box reveal" style="margin-top:24px">
-        延伸阅读（配方与避坑思路的公开来源）：
+        以上链接为公开资料，供延伸核对做法、成本与来源；本站配方以家庭口味记录为主。延伸阅读（配方与避坑思路的公开来源）：
         <a href="https://post.m.smzdm.com/talk/p/awwokdom/" target="_blank" rel="noopener">便利店12款神仙配方</a> ·
         <a href="https://post.m.smzdm.com/p/a260dd72/" target="_blank" rel="noopener">爆款配方没写的四个隐藏变量</a> ·
         <a href="https://post.m.smzdm.com/p/a5rdxvn3/" target="_blank" rel="noopener">便利店调酒的三笔账：成本、酒精度与翻车配方</a> ·
@@ -155,16 +310,24 @@
 
   /* technique tabs */
   var TECH = {
-    build: { label: "直调 Build", steps: ["杯中加满冰（最好先冰杯）。", "先倒基酒，再倒饮料/果汁。", "吧勺轻拌1–2圈；带气的只轻提一次。", "放装饰，完成。全程1分钟。"], note: "适用：便利店公式、懒人冰杯、金汤力、高球。要点：冰足、气饮料最后倒。" },
-    shake: { label: "摇和 Shake", steps: ["液体材料入摇壶（苏打/汤力除外）。", "加操作冰至半壶以上。", "盖紧摇8–15秒，壶身结霜即可。", "滤入加新冰的杯中，再补气饮料与装饰。"], note: "适用：含果汁、糖浆、奶、咖啡的配方（创意特调九款多数）。要点：操作冰不入杯；带气饮料绝不进摇壶。" },
-    stir: { label: "搅拌 Stir", steps: ["杯中加大冰/满冰。", "倒入全部酒类材料。", "吧勺贴杯壁匀速转圈10–30秒。", "滤冰或直接饮用，放装饰。"], note: "适用：全酒类、追求清澈酒体（梅子余晖、黑金晚钟）。要点：搅到杯壁起雾即停，过度搅拌=水味。" },
-    muddle: { label: "捣压与分层", steps: ["捣压：薄荷/水果+糖或酸入杯，轻捣3–4下释香，别捣成泥。", "分层：按密度从高糖到低糖依次慢倒。", "用勺背贴杯壁或贴冰面缓冲水流。", "喝前再拌，或插吸管分层喝。"], note: "适用：莫吉托（捣薄荷）、一见钟情/远山似黛（分层）。要点：分层靠糖度差，倒得越慢越清楚。" }
+    build: { label: "直调 Build", lead: "最省事的一种：所有材料直接在杯里完成，全程不碰摇壶。便利店冰杯、高球、金汤力都走这条路。", img: "assets/img/cl-highball.jpg", alt: "琥珀色气泡高球，杯中一块大冰，杯口一条柠檬皮", caption: "直调：杯中加满冰、倒酒、轻拌即可。图为威士忌高球，柠檬皮只增香，不进摇壶。", steps: ["杯中加满冰（最好先冰杯）。", "先倒基酒，再倒饮料/果汁。", "吧勺轻拌1–2圈；带气的只轻提一次。", "放装饰，完成。全程1分钟。"], note: "适用：便利店公式、懒人冰杯、金汤力、高球。要点：冰足、气饮料最后倒。" },
+    shake: { label: "摇和 Shake", lead: "配方里出现果汁、糖浆、奶或咖啡时，靠摇壶快速混匀并降温，摇到壶身结霜就够。", img: "assets/img/sig-garnet.jpg", alt: "红色短饮，古典杯中一块大冰，饰青柠片与石榴籽", caption: "摇和：含果汁/糖浆的短饮大多这样做出来的，摇完务必滤入装新冰的杯子。图为红石榴夜。", steps: ["液体材料入摇壶（苏打/汤力除外）。", "加操作冰至半壶以上。", "盖紧摇8–15秒，壶身结霜即可。", "滤入加新冰的杯中，再补气饮料与装饰。"], note: "适用：含果汁、糖浆、奶、咖啡的配方（创意特调九款多数）。要点：操作冰不入杯；带气饮料绝不进摇壶。" },
+    stir: { label: "搅拌 Stir", lead: "全是酒、想让酒体清澈透亮时用吧勺温和搅拌，避免摇出气泡和碎冰，口感更顺。", img: "assets/img/sig-plum.jpg", alt: "琥珀色短饮，古典杯中大冰与梅子，饰一条橙皮", caption: "搅拌：梅子余晖这类全酒配方，靠大冰与匀速搅拌降温，酒体保持清澈不发浑。", steps: ["杯中加大冰/满冰。", "倒入全部酒类材料。", "吧勺贴杯壁匀速转圈10–30秒。", "滤冰或直接饮用，放装饰。"], note: "适用：全酒类、追求清澈酒体（梅子余晖、黑金晚钟）。要点：搅到杯壁起雾即停，过度搅拌=水味。" },
+    muddle: { label: "捣压与分层", lead: "要让薄荷或水果出香，或想做出清楚的分界线，靠的是轻捣与慢倒，而不是用力摇。", img: "assets/img/cl-mojito.jpg", alt: "淡绿色莫吉托，大量薄荷叶与青柠角，杯中碎冰", caption: "捣压：薄荷轻捣几下释香就好，别捣成泥。分层则按糖度从高到低、沿勺背慢倒——图为莫吉托。", steps: ["捣压：薄荷/水果+糖或酸入杯，轻捣3–4下释香，别捣成泥。", "分层：按密度从高糖到低糖依次慢倒。", "用勺背贴杯壁或贴冰面缓冲水流。", "喝前再拌，或插吸管分层喝。"], note: "适用：莫吉托（捣薄荷）、一见钟情/远山似黛（分层）。要点：分层靠糖度差，倒得越慢越清楚。" }
   };
   var tabs = document.getElementById("techTabs");
   var panel = document.getElementById("techPanel");
   function show(k) {
     var t = TECH[k];
-    panel.innerHTML = "<h3>" + t.label + "</h3><ol class='steps'>" + t.steps.map(function (s) { return "<li>" + WX.esc(s) + "</li>"; }).join("") + "</ol><div class='note-box'>" + WX.esc(t.note) + "</div>";
+    var stepsHtml = t.steps.map(function (s) { return "<li>" + WX.esc(s) + "</li>"; }).join("");
+    panel.innerHTML = "<div class='g-tech-grid'>" +
+      "<div class='g-tech-copy'><h3>" + WX.esc(t.label) + "</h3>" +
+      "<p class='g-tech-lead muted'>" + WX.esc(t.lead) + "</p>" +
+      "<ol class='steps'>" + stepsHtml + "</ol>" +
+      "<div class='note-box'>" + WX.esc(t.note) + "</div></div>" +
+      "<figure class='g-figure g-tech-figure'><div class='g-frame'>" +
+      "<img src='" + WX.esc(t.img) + "' alt='" + WX.esc(t.alt) + "' width='900' height='900' loading='lazy'>" +
+      "</div><figcaption>" + WX.esc(t.caption) + "</figcaption></figure></div>";
   }
   tabs.innerHTML = Object.keys(TECH).map(function (k, i) {
     return '<button class="chip" data-tech="' + k + '" aria-pressed="' + (i === 0 ? "true" : "false") + '">' + TECH[k].label + "</button>";
