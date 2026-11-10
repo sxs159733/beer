@@ -34,6 +34,15 @@
     });
   };
 
+  /* 评分评论使用共享后端：所有 recipe_id 统一带站点前缀，与其它站点隔离。
+     kind 可选，用于区分「配方」与「名酒档案」两类内容。 */
+  WX.RID_PREFIX = "beer:";
+  WX.rid = function (raw, kind) {
+    var s = String(raw == null ? "" : raw);
+    if (s.indexOf(WX.RID_PREFIX) === 0) return s;
+    return WX.RID_PREFIX + (kind ? kind + "-" : "") + s;
+  };
+
   /* simple rocks-glass illustration for recipes without a photo */
   WX.glassSVG = function (color) {
     var c = color || "#d9a53c";

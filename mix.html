@@ -47,6 +47,14 @@
           <span class="label">基酒</span>
           <span id="baseChips" style="display:flex;gap:8px;flex-wrap:wrap"></span>
         </div>
+        <div class="filter-row">
+          <span class="label">排序</span>
+          <span class="sort-chips" role="group" aria-label="列表排序方式">
+            <button type="button" class="chip" data-sort="default" aria-pressed="true">推荐顺序</button>
+            <button type="button" class="chip" data-sort="rating" aria-pressed="false">评分 高 → 低</button>
+            <button type="button" class="chip" data-sort="comments" aria-pressed="false">评论 多 → 少</button>
+          </span>
+        </div>
         <div class="result-count" id="resultCount" aria-live="polite"></div>
       </div>
       <div class="grid cols-3" id="recipeGrid"></div>
@@ -108,6 +116,7 @@
         <span class="garnish" id="mGarnish"></span>
         <span id="mSource"></span>
       </div>
+      <section class="rd-community" data-community aria-label="评分与评论"></section>
       <div class="modal-disclaimer">理性饮酒 · 未成年人禁止饮酒 · 喝酒不开车</div>
     </div>
   </div>
@@ -126,6 +135,7 @@
 
 <script src="assets/js/data.js"></script>
 <script src="assets/js/site.js"></script>
+<script src="assets/js/community.js"></script>
 <script src="assets/js/mix.js"></script>
 </body>
 </html>

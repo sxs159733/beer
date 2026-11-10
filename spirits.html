@@ -150,6 +150,14 @@
           </span>
           <span class="result-count" id="spiritCount" aria-live="polite"></span>
         </div>
+        <div class="filter-row">
+          <span class="label">排序</span>
+          <span id="spiritSort" class="sort-chips" role="group" aria-label="列表排序方式">
+            <button type="button" class="chip" data-sort="default" aria-pressed="true">推荐顺序</button>
+            <button type="button" class="chip" data-sort="rating" aria-pressed="false">评分 高 → 低</button>
+            <button type="button" class="chip" data-sort="comments" aria-pressed="false">评论 多 → 少</button>
+          </span>
+        </div>
       </div>
 
       <div class="sp-intro-split">
@@ -246,6 +254,7 @@
       <div id="sFacts" style="display:flex;gap:8px;flex-wrap:wrap;margin:16px 0 6px"></div>
       <div id="sProfile" class="sp-profile"></div>
       <p class="sp-profile-legend">字段口径：名称、酒类与产地、主要原料、酿造方法、香气与口感（含苦甜 / 醇厚度 / 余味）、酒精度数、常见规格、适饮温度、搭配建议、简要背景与特点。标注「待补充」表示暂无可核实的公开来源，不作推测；标注「本类通例」的是该酒类通用做法，不代表某一瓶的具体参数。</p>
+      <section class="rd-community" data-community aria-label="评分与评论"></section>
     </div>
   </div>
 </dialog>
@@ -263,6 +272,7 @@
 
 <script src="assets/js/data.js"></script>
 <script src="assets/js/site.js"></script>
+<script src="assets/js/community.js"></script>
 <script src="assets/js/spirits-profiles.js"></script>
 <script src="assets/js/spirits.js"></script>
 <script>

@@ -1,7 +1,7 @@
 /* 微醺手册 · 调酒实验室 */
 (function () {
   var R = window.WX.RECIPES, CATS = window.WX.CATS, BASES = window.WX.BASES;
-  var state = { cat: "all", base: "all", q: "" };
+  var state = { cat: "all", base: "all", q: "", sort: "default" };
   var mult = 1, current = null;
 
   var grid = document.getElementById("recipeGrid");
@@ -18,6 +18,7 @@
       '<span class="body"><span class="names"><strong>' + WX.esc(r.name) + "</strong><span>" + WX.esc(r.en) + "</span></span>" +
       '<span class="taste">' + WX.esc(r.taste) + "</span>" +
       '<span class="meta"><span class="tag">' + CATS[r.cat].label + '</span><span class="tag plain">' + WX.esc(r.base) + '</span><span class="tag plain">' + WX.esc(r.method) + '</span><span class="abv-dot">酒精度 ' + WX.esc(r.abv) + "</span></span>" +
+      '<span class="rcard-rate" data-rate="' + WX.esc(WX.rid(r.id)) + '"></span>' +
       '<span class="card-cta">查看完整配方 <span aria-hidden="true">&rarr;</span></span></span></button>';
   }
 
@@ -34,8 +35,26 @@
     });
   }
 
+  function stat(r) {
+    return window.JZSCommunity
+      ? window.JZSCommunity.getStats(WX.rid(r.id))
+      : { avg: 0, count: 0, comments: 0 };
+  }
+
+  function sorted(list) {
+    if (state.sort !== "rating" && state.sort !== "comments") return list;
+    return list.slice().sort(function (a, b) {
+      var sa = stat(a), sb = stat(b);
+      var va = state.sort === "rating" ? sa.avg : sa.comments;
+      var vb = state.sort === "rating" ? sb.avg : sb.comments;
+      if (vb !== va) return vb - va;                       /* 高 → 低，无数据自然排最后 */
+      if (state.sort === "rating" && sb.count !== sa.count) return sb.count - sa.count;
+      return 0;
+    });
+  }
+
   function render() {
-    var list = filtered();
+    var list = sorted(filtered());
     count.textContent = "共 " + list.length + " 款配方";
     catDesc.textContent = state.cat === "all"
       ? "从便利店冰杯到签名鸡尾酒，按分类、基酒或材料搜索，点开任意一杯看完整做法。"
@@ -43,6 +62,7 @@
     grid.innerHTML = list.length
       ? list.map(cardHTML).join("")
       : '<div class="empty-state" style="grid-column:1/-1">没有找到匹配的酒款。<br>换个关键词，或把分类切回"全部"试试。</div>';
+    if (window.JZSCommunity) window.JZSCommunity.decorateCards(grid);
   }
 
   /* ---- filters ---- */
@@ -62,6 +82,14 @@
   }
 
   document.addEventListener("click", function (e) {
+    var s = e.target.closest("[data-sort]");
+    if (s) {
+      state.sort = s.getAttribute("data-sort");
+      document.querySelectorAll("[data-sort]").forEach(function (x) {
+        x.setAttribute("aria-pressed", x === s ? "true" : "false");
+      });
+      render(); return;
+    }
     var c = e.target.closest("[data-cat]");
     if (c) {
       state.cat = c.getAttribute("data-cat");
@@ -126,6 +154,9 @@
     mult = 1;
     fillModal(r);
     if (!modal.open) modal.showModal();
+    if (window.JZSCommunity) {
+      window.JZSCommunity.renderDialog(WX.rid(r.id), document.querySelector("[data-community]"));
+    }
     if (history.replaceState) history.replaceState(null, "", "#" + id);
   }
 
@@ -163,6 +194,13 @@
     if (id) openModal(id);
   }
   window.addEventListener("hashchange", fromHash);
+
+  /* 评分/评论数据就绪后刷新卡片，并让排序结果跟上最新分数 */
+  window.addEventListener("jzs-stats", function () {
+    if (!window.JZSCommunity) return;
+    if (state.sort === "rating" || state.sort === "comments") render();
+    else window.JZSCommunity.decorateCards(grid);
+  });
 
   buildChips();
   render();

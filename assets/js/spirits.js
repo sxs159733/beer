@@ -4,10 +4,16 @@
   var DEFAULTS = window.WX.CAT_PROFILE || {};
   var EXTRA = window.WX.SPIRIT_EXTRA || {};
   var TODO = "待补充";
-  var state = { cat: "baijiu", q: "" };
+  var state = { cat: "baijiu", q: "", sort: "default" };
   var grid = document.getElementById("spiritGrid");
   var intro = document.getElementById("catIntro");
   var modal = document.getElementById("spiritModal");
+
+  /* 名酒档案没有 id 字段，用英文名生成稳定 slug，作为共享后端的前缀 recipe_id */
+  function slug(s) {
+    return String(s.en || s.name || "").toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "");
+  }
+  function rid(s) { return WX.rid(slug(s), "spirit"); }
 
   /* 把原有档案与补充档案合并为统一的十字段结构；缺失一律标「待补充」 */
   function pick(v, fallback) {
@@ -48,7 +54,12 @@
       '<span class="facts"><span>产地 <b>' + WX.esc(s.origin) + "</b></span><span>度数 <b>" + WX.esc(s.abv) + "</b></span></span>" +
       '<span class="sp-card-cat tag plain">' + WX.esc(catLabel(s.cat)) + "</span>" +
       '<span class="price">' + WX.esc(priceText(s.price)) + "</span>" +
-      '<span class="muted small">' + WX.esc(s.taste === TODO ? "口感资料整理中" : s.taste) + "</span></button>";
+      '<span class="muted small">' + WX.esc(s.taste === TODO ? "口感资料整理中" : s.taste) + "</span>" +
+      '<span class="rcard-rate" data-rate="' + WX.esc(rid(s)) + '"></span></button>';
+  }
+
+  function stat(s) {
+    return window.JZSCommunity ? window.JZSCommunity.getStats(rid(s)) : { avg: 0, count: 0, comments: 0 };
   }
 
   function render() {
@@ -62,11 +73,22 @@
     LIST.forEach(function (s, idx) {
       if (s.cat !== state.cat) return;
       if (q && (s.name + s.en + s.origin + s.taste).toLowerCase().indexOf(q) === -1) return;
-      items.push(cardHTML(s, idx));
+      items.push({ s: s, idx: idx });
     });
-    grid.innerHTML = items.length ? items.join("") :
+    if (state.sort === "rating" || state.sort === "comments") {
+      items.sort(function (a, b) {
+        var sa = stat(a.s), sb = stat(b.s);
+        var va = state.sort === "rating" ? sa.avg : sa.comments;
+        var vb = state.sort === "rating" ? sb.avg : sb.comments;
+        if (vb !== va) return vb - va;
+        if (state.sort === "rating" && sb.count !== sa.count) return sb.count - sa.count;
+        return 0;
+      });
+    }
+    grid.innerHTML = items.length ? items.map(function (it) { return cardHTML(it.s, it.idx); }).join("") :
       '<div class="empty-state" style="grid-column:1/-1">这个分类下没有匹配的酒款，换个关键词试试。</div>';
     document.getElementById("spiritCount").textContent = "本分类 " + items.length + " 款 · 价格为市场参考区间，随渠道与行情波动";
+    if (window.JZSCommunity) window.JZSCommunity.decorateCards(grid);
   }
 
   /* 详情弹窗：按统一字段分组呈现 */
@@ -101,6 +123,15 @@
     render();
   });
   document.getElementById("spiritSearch").addEventListener("input", function (e) { state.q = e.target.value; render(); });
+  document.getElementById("spiritSort").addEventListener("click", function (e) {
+    var b = e.target.closest("[data-sort]");
+    if (!b) return;
+    state.sort = b.getAttribute("data-sort");
+    document.querySelectorAll("#spiritSort [data-sort]").forEach(function (x) {
+      x.setAttribute("aria-pressed", x === b ? "true" : "false");
+    });
+    render();
+  });
 
   grid.addEventListener("click", function (e) {
     var c = e.target.closest(".spirit-card");
@@ -112,6 +143,9 @@
       '<span class="tag plain">产地 ' + WX.esc(s.origin) + '</span> <span class="tag plain">度数 ' + WX.esc(s.abv) + '</span> <span class="tag">' + WX.esc(priceText(s.price)) + "</span>";
     document.getElementById("sProfile").innerHTML = profileHTML(s);
     if (!modal.open) modal.showModal();
+    if (window.JZSCommunity) {
+      window.JZSCommunity.renderDialog(rid(s), document.querySelector("[data-community]"));
+    }
   });
   modal.addEventListener("click", function (e) { if (e.target === modal) modal.close(); });
   document.getElementById("sClose").addEventListener("click", function () { modal.close(); });
@@ -120,5 +154,12 @@
   document.getElementById("spiritTabs").innerHTML = CATS.map(function (c, i) {
     return '<button class="chip" data-scat="' + c.id + '" aria-pressed="' + (i === 0 ? "true" : "false") + '">' + c.label + "</button>";
   }).join("");
+
+  window.addEventListener("jzs-stats", function () {
+    if (!window.JZSCommunity) return;
+    if (state.sort === "rating" || state.sort === "comments") render();
+    else window.JZSCommunity.decorateCards(grid);
+  });
+
   render();
 })();
